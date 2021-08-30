@@ -1,4 +1,4 @@
-package com.project.bus_reservation.model;
+package com.example.reservationservice.model;
 
 import com.mongodb.internal.connection.Time;
 
