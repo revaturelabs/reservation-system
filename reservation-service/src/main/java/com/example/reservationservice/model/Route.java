@@ -4,7 +4,6 @@ package com.example.reservationservice.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.mongodb.internal.connection.Time;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +12,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Document
@@ -28,8 +28,8 @@ public class Route {
     private String source;
     private String destination;
     private int distance;
-    private Time dep_time;
-    private Time arrival_time;
+    private LocalTime dep_time;
+    private LocalTime arrival_time;
     private List<BusStopPoint> stop_points;
     @DBRef
     private List<Bus> bus_list;

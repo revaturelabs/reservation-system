@@ -1,10 +1,11 @@
 package com.example.reservationservice.model;
 
-import com.mongodb.internal.connection.Time;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalTime;
 
 @NoArgsConstructor
 @Data
@@ -12,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class BusStopPoint {
     private String name;
     private int distance;
-    private Time time;
+    private LocalTime time;
 
 }
