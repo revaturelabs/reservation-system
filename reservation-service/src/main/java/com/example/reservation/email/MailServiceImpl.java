@@ -1,4 +1,4 @@
-package com.example.reservationservice.email;
+package com.example.reservation.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;

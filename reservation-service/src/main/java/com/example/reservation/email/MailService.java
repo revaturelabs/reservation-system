@@ -1,4 +1,4 @@
-package com.example.reservationservice.email;
+package com.example.reservation.email;
 
 import javax.mail.MessagingException;
 import java.io.IOException;

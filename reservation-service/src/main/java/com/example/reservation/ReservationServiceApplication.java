@@ -1,6 +1,6 @@
-package com.example.reservationservice;
+package com.example.reservation;
 
-import com.example.reservationservice.email.MailService;
+import com.example.reservation.email.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
