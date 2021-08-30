@@ -19,7 +19,6 @@ public class User {
     private String email;
     private String mobile;
     private Date dob;
- //   @Enumerated(EnumType.STRING)
     private Gender gender;
     private String avatar;
     private Address address;
