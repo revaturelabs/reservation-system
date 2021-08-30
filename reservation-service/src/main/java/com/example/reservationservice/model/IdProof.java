@@ -1,6 +1,15 @@
 package com.example.reservationservice.model;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
 public class IdProof {
-    String type;
-    String number;
+    private String type;
+    private String number;
+
 }
