@@ -1,22 +1,28 @@
 package com.example.reservationservice.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 public class Bus {
 
-
-    String name;
-    String number;
-    BusType type;
-    SeatType seating;
-    int seats;
-    Route route_id;
-    BusContactPerson contact;
+    private String name;
+    @Id
+    private String number;
+    private BusType type;
+    private SeatType seating;
+    private int seats;
+    @DBRef
+    private Route route_id;
+    private BusContactPerson contact;
 
 
 }

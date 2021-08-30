@@ -5,10 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 public class BusContactPerson {
 
-    String name;
-    String mobile;
+    private String name;
+    private String mobile;
+
 }
