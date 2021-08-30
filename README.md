@@ -1,4 +1,2 @@
 # reservation-system
 
-
-initial commit
