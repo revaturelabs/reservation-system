@@ -1,5 +1,6 @@
 package com.example.reservationservice.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,4 +14,5 @@ public class Address {
     private String city;
     private String country;
     private String pin_code;
+
 }

@@ -24,4 +24,5 @@ public class Payment {
     private ObjectId txn_id;
     private Date date;
     private double amount;
+
 }

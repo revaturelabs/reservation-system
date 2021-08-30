@@ -1,5 +1,6 @@
 package com.example.reservationservice.model;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -32,5 +33,6 @@ public class Route {
     private List<BusStopPoint> stop_points;
     @DBRef
     private List<Bus> bus_list;
+
 
 }

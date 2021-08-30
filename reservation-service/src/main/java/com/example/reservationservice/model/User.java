@@ -27,4 +27,5 @@ public class User {
     private Authoritiy authority;
     private List<Traveller> travellers;
 
+
 }

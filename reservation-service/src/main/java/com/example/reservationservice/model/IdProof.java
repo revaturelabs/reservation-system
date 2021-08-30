@@ -1,5 +1,6 @@
 package com.example.reservationservice.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,4 +11,5 @@ import lombok.NoArgsConstructor;
 public class IdProof {
     private String type;
     private String number;
+
 }

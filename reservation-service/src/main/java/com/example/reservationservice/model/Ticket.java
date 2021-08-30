@@ -1,5 +1,6 @@
 package com.example.reservationservice.model;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -39,4 +40,5 @@ public class Ticket {
     @DBRef
     private Payment txn_id;
     private List<Traveller> travellers;
+
 }

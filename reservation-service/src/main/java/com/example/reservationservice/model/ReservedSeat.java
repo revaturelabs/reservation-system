@@ -20,4 +20,5 @@ public class ReservedSeat {
     private Bus bus_number;
     private List<Integer> reserved_seats;
 
+
 }

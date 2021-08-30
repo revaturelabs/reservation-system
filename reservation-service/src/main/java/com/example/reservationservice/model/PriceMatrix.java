@@ -1,5 +1,6 @@
 package com.example.reservationservice.model;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -23,4 +24,5 @@ public class PriceMatrix {
     private BusType bus_type;
     private SeatType seat_type;
     private double per_km_price;
+
 }

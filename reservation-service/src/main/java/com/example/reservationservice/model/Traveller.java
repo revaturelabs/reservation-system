@@ -1,5 +1,6 @@
 package com.example.reservationservice.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,4 +13,5 @@ public class Traveller {
     private IdProof idProof;
     private int age;
     private boolean disabled;
+
 }
