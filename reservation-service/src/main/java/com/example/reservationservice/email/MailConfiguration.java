@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
-public class EmailConfiguration {
+public class MailConfiguration {
 
     @Autowired
     private Environment env;
@@ -21,8 +21,8 @@ public class EmailConfiguration {
 
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("nagcloudlab@gmail.com");
-        mailSender.setPassword("imNag2020");
+        mailSender.setUsername(env.getProperty("gmail.user"));
+        mailSender.setPassword(env.getProperty("gmail.password"));
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");

@@ -1,6 +1,12 @@
 package com.example.reservationservice.email;
 
-public interface EmailService {
-    public void sendEmail(String to, String subject, String text);
+import javax.mail.MessagingException;
+import java.io.IOException;
+
+public interface MailService {
+
     public void sendEmail();
+    public void sendEmail(String to, String subject, String text);
+    public void sendEmailWithAttachment() throws MessagingException, IOException;
+
 }

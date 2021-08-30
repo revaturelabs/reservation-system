@@ -12,10 +12,24 @@ import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 
 @Component
-public class EmailServiceImpl implements MailService {
+public class MailServiceImpl implements MailService {
 
     @Autowired
     private JavaMailSender emailSender;
+
+
+    public void sendEmail() {
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom("nagcloudlab@gmail.com");
+        msg.setTo("nagcloudlab@gmail.com");
+
+        msg.setSubject("Reservation System - Test Email");
+        msg.setText("Hello World \n from Reservation System");
+
+        emailSender.send(msg);
+
+    }
 
     public void sendEmail(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -28,24 +42,12 @@ public class EmailServiceImpl implements MailService {
 
 
 
-    public void sendEmail() {
-
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("to_1@gmail.com", "to_2@gmail.com", "to_3@yahoo.com");
-
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
-
-        emailSender.send(msg);
-
-    }
 
 
 
-    void sendEmailWithAttachment() throws MessagingException, IOException {
+    public void sendEmailWithAttachment() throws MessagingException, IOException {
 
         MimeMessage msg = emailSender.createMimeMessage();
-
         // true = multipart message
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 
