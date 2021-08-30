@@ -1,8 +1,15 @@
 package com.example.reservationservice.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
 public class Traveller {
-    String name;
-    IdProof idProof;
-    int age;
-    boolean disabled;
+    private String name;
+    private IdProof idProof;
+    private int age;
+    private boolean disabled;
 }
