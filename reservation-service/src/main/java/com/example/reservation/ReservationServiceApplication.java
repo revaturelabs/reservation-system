@@ -13,10 +13,10 @@ public class ReservationServiceApplication /*implements CommandLineRunner*/ {
     public static void main(String[] args) {
         SpringApplication.run(ReservationServiceApplication.class, args);
     }
-//
+
 //    @Autowired
 //    private MailService emailService;
-
+//
 //    @Override
 //    public void run(String... args) throws Exception {
 //        System.out.println("Sending Email...");
