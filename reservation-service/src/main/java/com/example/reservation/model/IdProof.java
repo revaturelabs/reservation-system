@@ -11,5 +11,4 @@ import lombok.NoArgsConstructor;
 public class IdProof {
     private String type;
     private String number;
-
 }
