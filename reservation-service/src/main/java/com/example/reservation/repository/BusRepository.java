@@ -11,11 +11,13 @@ import java.util.List;
 @Repository
 public interface BusRepository extends MongoRepository<Bus,String> {
 
-//    List<Bus> findByType(BusType type);
+    // List<Bus> findByType(BusType type);
 
     // or
 
     @Query("{'type':?0}")
     List<Bus> findAll(BusType type);
+
+
 
 }
