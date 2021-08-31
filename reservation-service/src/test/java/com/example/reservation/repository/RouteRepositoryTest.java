@@ -1,6 +1,7 @@
 package com.example.reservation.repository;
 
 import com.example.reservation.model.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -94,6 +95,11 @@ public class RouteRepositoryTest {
 
         assertEquals(2,route.getBusList().size());
 
+    }
+
+    @AfterEach
+    public void afterEach(){
+        routeRepository.deleteAll();
     }
 
 }
