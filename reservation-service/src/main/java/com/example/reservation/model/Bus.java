@@ -19,10 +19,10 @@ public class Bus {
     @Id
     private String number;
     private BusType type;
-    private SeatType seating;
+    private SeatType seatType;
     private int seats;
     @DBRef
     private Route route;
-    private BusContactPerson contact;
+    private BusContact contact;
 
 }

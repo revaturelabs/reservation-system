@@ -12,6 +12,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,26 +21,21 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-
 public class Ticket {
-
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonSerialize(using= ToStringSerializer.class)
     @Id
     private ObjectId id;
-    private Date booked_date;
-    private Date travel_date;
+    private LocalDateTime bookedDateTime;
+    private LocalDateTime travelDateTime;
     private double amount;
     private String source;
     private String destination;
-    @DBRef
-    private Bus bus_ref;
-    private int seat_numbers;
-    private TicketStatus ticket_status;
-    @DBRef
-    private User user_ref;
-    @DBRef
-    private Payment txn_id;
+    private int[] seatNumbers;
+    private TicketStatus status;
     private List<Traveller> travellers;
-
+    @DBRef(lazy = true)
+    private Bus bus;
+    @DBRef(lazy = true)
+    private User user;
+//    @DBRef
+//    private Payment payment;
 }

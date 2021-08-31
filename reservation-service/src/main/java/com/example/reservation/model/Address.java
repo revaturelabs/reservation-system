@@ -16,5 +16,4 @@ public class Address {
     private String pin_code;
 
 
-
 }

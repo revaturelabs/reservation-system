@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-public class Admin {
+public class BusContact {
 
     private String name;
-    private Authoritiy authority;
+    private String mobile;
 
 }

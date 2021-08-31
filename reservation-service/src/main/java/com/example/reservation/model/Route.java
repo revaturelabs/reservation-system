@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document
@@ -23,11 +24,9 @@ public class Route {
     private String source;
     private String destination;
     private int distance;
-    private LocalTime dep_time;
-    private LocalTime arrival_time;
-    private List<BusStopPoint> stop_points;
+    private LocalTime depTime;
+    private LocalTime arrivalTime;
+    private List<StopPoint> stopPoints;
     @DBRef
-    private List<Bus> bus_list;
-
-
+    private List<Bus> busList=new ArrayList<>();
 }

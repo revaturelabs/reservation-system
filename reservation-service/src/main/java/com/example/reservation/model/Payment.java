@@ -1,8 +1,5 @@
 package com.example.reservation.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +16,7 @@ import java.util.Date;
 public class Payment {
 
     @Id
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonSerialize(using= ToStringSerializer.class)
-    private ObjectId txn_id;
+    private ObjectId id;
     private Date date;
     private double amount;
 

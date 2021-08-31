@@ -1,5 +1,6 @@
 package com.example.reservation.repository;
 
+<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -11,6 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
+=======
+import com.example.reservation.model.Bus;
+import com.example.reservation.model.BusType;
+import com.example.reservation.model.SeatType;
+>>>>>>> c249284b57becc3becfadd561fcf20dcb0fc1c55
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,12 +25,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+<<<<<<< HEAD
 import com.example.reservation.model.Bus;
 import com.example.reservation.model.BusContactPerson;
 import com.example.reservation.model.BusStopPoint;
 import com.example.reservation.model.BusType;
 import com.example.reservation.model.Route;
 import com.example.reservation.model.SeatType;
+=======
+import java.util.List;
+>>>>>>> c249284b57becc3becfadd561fcf20dcb0fc1c55
 
 @DataMongoTest
 @ExtendWith(SpringExtension.class)
@@ -163,6 +173,7 @@ public class BusRepositoryTest {
 		assertNull(bus.getContact());
 	}
 
+<<<<<<< HEAD
 	@Test
 	public void update_bus_contact_person_fail() {
 		Bus bus = busRepository.findById("TN18BZ1109").get();
@@ -177,6 +188,21 @@ public class BusRepositoryTest {
 		Bus bus = busRepository.findById("TN18BZ1109").get();
 		assertEquals("TN18BZ1109", bus.getNumber());
 	}
+=======
+        Bus bus1=new Bus();
+        bus1.setNumber("TN18BZ1109");
+        bus1.setName("Royal Bus");
+        bus1.setSeatType(SeatType.CHAIR);
+        bus1.setType(BusType.AC);
+        bus1.setSeats(40);
+
+        Bus bus2=new Bus();
+        bus2.setNumber("TN18BZ1108");
+        bus2.setName("Classic Bus");
+        bus2.setType(BusType.AC);
+        bus2.setSeatType(SeatType.SLEEPER);
+        bus2.setSeats(20);
+>>>>>>> c249284b57becc3becfadd561fcf20dcb0fc1c55
 
 	@Test
 	public void get_bus_for_id_fail() {
@@ -192,6 +218,7 @@ public class BusRepositoryTest {
 		assertEquals("TN18BZ1109", bus.getNumber());
 	}
 
+<<<<<<< HEAD
 	@Test
 	public void get_bus_for_name_fail() {
 		Optional<Bus> optional = Optional.ofNullable(busRepository.findByName("Royal Bus"));
@@ -234,6 +261,25 @@ public class BusRepositoryTest {
 		Bus bus = busRepository.findByRoute(route.getId());
 		assertEquals(new ObjectId("612b59449c35910c2057b753"), bus.getRoute().getId());
 	}
+=======
+    @Test
+    public void getAll(){
+       List<Bus> busList= busRepository.findAll();
+       assertEquals(2,busList.size());
+    }
+
+    @Test
+    public void getBusByNumber(){
+        Bus bus= busRepository.findById("TN18BZ1108").get();
+        assertEquals("TN18BZ1108",bus.getNumber());
+    }
+
+    @Test
+    public void getAcBus(){
+       List<Bus> busList= busRepository.findByType(BusType.AC);
+        assertEquals(2,busList.size());
+    }
+>>>>>>> c249284b57becc3becfadd561fcf20dcb0fc1c55
 
 	@Test
 	public void get_bus_for_route_fail() {
@@ -243,11 +289,19 @@ public class BusRepositoryTest {
 		}
 	}
 
+<<<<<<< HEAD
 	@Test
 	public void get_all_bus() {
 		List<Bus> busList = busRepository.findAll();
 		assertEquals(1, busList.size());
 	}
+=======
+    @Test
+    public void getNonAcBus(){
+        List<Bus> busList= busRepository.findByType(BusType.NON_AC);
+        assertEquals(0,busList.size());
+    }
+>>>>>>> c249284b57becc3becfadd561fcf20dcb0fc1c55
 
 	@Test
 	public void remove_bus_success() {

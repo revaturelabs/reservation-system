@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Document
@@ -14,17 +14,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class User {
-    private String name;
     @Id
     private String email;
+    private String name;
     private String mobile;
-    private Date dob;
+    private LocalDate dob;
     private Gender gender;
     private String avatar;
     private Address address;
     private IdProof idProof;
-    private Authoritiy authority;
     private List<Traveller> travellers;
-
-
 }
