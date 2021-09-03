@@ -22,10 +22,10 @@ springdoc:
 
 
 
-STRIPE_SECRET_KEY: sk_test_51JUP34SH554kPulbBG6RNDJmk9phIUAdKZ1ENhJ3v1kjh0IYF165TVzUjMrbLw8nzDxBEawQX2E9kMw01LIpbmKY00NIW19Zey
-STRIPE_PUBLIC_KEY: pk_test_51JUP34SH554kPulbT8WLN5oatFKrJP9ELWwY9mL1e7EzbcbQj2VqyhJn5JjeNXFAg9yx7oQAMgXk29U3ppZ5HaU400mqFmXvXJ
+STRIPE_SECRET_KEY: sk_test_51IL3Q7Dly7fxn3jln4fZrvtpWICmjYxRAx3fcmd0o3gBT7mN87EDYTONNbojvQimuPxIBOev7YyWNyWBboV96rNo00NLUQfKzO
+STRIPE_PUBLIC_KEY: pk_test_51IL3Q7Dly7fxn3jlRnY3Ucn3kQmf3jNJJAVT7n9f0eQ7IPr4B5ZrNAOOGeoBtsetf9EiwPfm49GBiAGQzAAyzLWz00qutzbeZ5
 
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/reservation-system
+      uri: mongodb+srv://busclient:busclient123@cluster0.0bsff.mongodb.net/Bus_Reservation_System?retryWrites=true
