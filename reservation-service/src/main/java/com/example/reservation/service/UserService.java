@@ -1,21 +1,15 @@
 package com.example.reservation.service;
 
+
 import com.example.reservation.model.User;
-import com.example.reservation.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    public User getUser(String email){
-        Optional<User> user=userRepository.findById(email);
-        return user.orElse(null);
-    }
+   void addNewUser(User user);
+   List<User> getAll();
+   User getUserByEmail(String email);
+   User getUserByMobile(String mobile);
 
 }
