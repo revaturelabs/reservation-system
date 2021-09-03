@@ -23,6 +23,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Ticket {
     @Id
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId id;
     private LocalDateTime bookedDateTime;
     private LocalDateTime travelDateTime;
