@@ -2,14 +2,15 @@ package com.example.reservation.service;
 
 
 import com.example.reservation.model.User;
+import com.example.reservation.rest.payloads.UserPayload;
 
 import java.util.List;
 
 public interface UserService {
 
    User addNewUser(User user);
-   List<User> getAll();
-   User getUserByEmail(String email);
-   User getUserByMobile(String mobile);
+   List<UserPayload> getAll();
+   UserPayload getUserByEmail(String email);
+   UserPayload getUserByMobile(String mobile);
 
 }
