@@ -8,6 +8,6 @@ public interface TicketService {
 
     void bookNewTicket(Ticket ticket);
     List<Ticket> getTickets(String user);
-    void cancelTicket(String ticketId);
+    void cancelTicket(ObjectId ticketId);
 
 }
