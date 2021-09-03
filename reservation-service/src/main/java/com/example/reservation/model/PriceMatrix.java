@@ -8,7 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection = "price-matrix")
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
@@ -19,7 +19,6 @@ public class PriceMatrix {
     private BusType busType;
     private SeatType seatType;
     private double basePrice;
-
 
 
 }

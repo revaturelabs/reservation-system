@@ -2,7 +2,7 @@ package com.example.reservation.rest;
 
 import com.example.reservation.exception.ResourceConflictExeception;
 import com.example.reservation.model.Bus;
-import com.example.reservation.rest.payload.ResponseError;
+import com.example.reservation.rest.payloads.ResponseErrorPayload;
 import com.example.reservation.service.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,8 +24,8 @@ public class BusController {
 
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(value = {ResourceConflictExeception.class})
-    public ResponseError exceptionHandler(Throwable t) {
-        ResponseError responseError = new ResponseError();
+    public ResponseErrorPayload exceptionHandler(Throwable t) {
+        ResponseErrorPayload responseError = new ResponseErrorPayload();
         responseError.setError(true);
         responseError.setMessage(t.getMessage());
         return responseError;

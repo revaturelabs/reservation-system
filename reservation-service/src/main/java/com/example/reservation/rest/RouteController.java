@@ -2,11 +2,14 @@ package com.example.reservation.rest;
 
 import com.example.reservation.model.Route;
 import com.example.reservation.model.Trip;
+import com.example.reservation.rest.payloads.RoutePayload;
 import com.example.reservation.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/routes")
@@ -20,9 +23,10 @@ public class RouteController {
             @PathVariable("source") String source,
             @PathVariable("destination") String destination
     ){
-        Route route=routeService.getRoute(source,destination);
+        RoutePayload route=routeService.getRoute(LocalDate.now(),source,destination);
         return  ResponseEntity.status(HttpStatus.OK).body(route);
     }
+
 
 
     @PostMapping

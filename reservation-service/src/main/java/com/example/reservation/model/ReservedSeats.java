@@ -8,19 +8,22 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-@Document
+@Document(collection = "reserved-seats")
 public class ReservedSeats {
 
     @Id
     ObjectId id;
-    private Date travel_date;
-    private List<Integer> reservedSeats;
+    private LocalDate date;
+    private List<Integer> reservedSeats=new ArrayList<>();
     @DBRef
     private Bus bus;
 

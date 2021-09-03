@@ -1,9 +1,9 @@
-package com.example.reservation.rest.payload;
+package com.example.reservation.rest.payloads;
 
 import lombok.Data;
 
 @Data
-public class ResponseError {
+public class ResponseErrorPayload {
     private boolean error;
     private String message;
 }

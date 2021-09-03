@@ -1,12 +1,22 @@
 package com.example.reservation.service;
 
-import com.example.reservation.model.Ticket;
+import com.example.reservation.model.*;
+import com.example.reservation.repository.PriceRepository;
+import com.example.reservation.repository.ReservedSeatsRepository;
+import com.example.reservation.repository.TicketRepository;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TicketServiceImpl implements TicketService {
 
-        @Autowired
+    @Autowired
     PriceRepository priceRepository;
 
     @Autowired
@@ -67,7 +77,7 @@ public class TicketServiceImpl implements TicketService {
 
         ReservedSeats reservedSeats1=new ReservedSeats();
         reservedSeats1.setBus(bus);
-        reservedSeats1.setTravel_date(ticket.getTravelDateTime());
+        reservedSeats1.setDate(ticket.getTravelDateTime().toLocalDate());
         reservedSeats1.getReservedSeats().addAll(new ArrayList(Arrays.asList(reservedSeats)));
 
         reservedSeatsRepository.save(reservedSeats1);
@@ -106,7 +116,7 @@ public class TicketServiceImpl implements TicketService {
 
          */
         //insitie the refund
-        if(ChronoUnit.DAYS.between(ticket.getTravelDateTime().toLocalDate(),LocalDate.now())>=7)
+        if(ChronoUnit.DAYS.between(ticket.getTravelDateTime().toLocalDate(), LocalDate.now())>=7)
             refundAmt=ticket.getAmount()*0.85;
         else if(ChronoUnit.DAYS.between(ticket.getTravelDateTime().toLocalDate(),LocalDate.now())>=4){
             refundAmt=ticket.getAmount()*0.50;

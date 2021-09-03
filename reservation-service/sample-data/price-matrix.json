@@ -1,0 +1,25 @@
+[
+  {
+    "bus-type" : "AC",
+    "seat-type" : "SLEEPER",
+    "per-km-price" : "250"
+  },
+  {
+  "bus-type" : "NON-AC",
+  "seat-type" : "SLEEPER",
+  "per-km-price" : "200"
+  },
+
+  {
+  "bus-type" : "AC",
+  "seat-type" : "CHAIR",
+  "per-km-price" : "150"
+  },
+
+  {
+  "bus-type" : "NON-AC",
+  "seat-type" : "CHAIR",
+  "per-km-price" : "100"
+  }
+
+]

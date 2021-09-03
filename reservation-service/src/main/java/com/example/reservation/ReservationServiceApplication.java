@@ -1,6 +1,9 @@
 package com.example.reservation;
 
 import com.example.reservation.email.MailService;
+import com.example.reservation.model.ReservedSeats;
+import com.example.reservation.repository.BusRepository;
+import com.example.reservation.repository.ReservedSeatsRepository;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -15,25 +18,42 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @SpringBootApplication
 @EnableWebMvc
 @EnableMongoRepositories
-public class ReservationServiceApplication /*implements CommandLineRunner*/ {
+public class ReservationServiceApplication implements CommandLineRunner {
 
 
     public static void main(String[] args) {
         SpringApplication.run(ReservationServiceApplication.class, args);
     }
 
-//    @Autowired
-//    private MailService emailService;
+    @Autowired
+    private MailService emailService;
 
-//    @Override
-//    public void run(String... args) throws Exception {
+    @Autowired
+    private ReservedSeatsRepository reservedSeatsRepository;
+
+    @Autowired
+    private BusRepository busRepository;
+
+    @Override
+    public void run(String... args) throws Exception {
 //        System.out.println("Sending Email...");
 //        emailService.sendEmail("nagcloudlab@gmail.com","hello123","this test email");
 //        System.out.println("Done");
-//    }
+
+        ReservedSeats reservedSeats=new ReservedSeats();
+        reservedSeats.setDate(LocalDate.now());
+        reservedSeats.setBus(busRepository.findById("1212").get());
+        reservedSeats.setReservedSeats(List.of(12,13));
+
+        reservedSeatsRepository.save(reservedSeats);
+
+    }
 
     @Value("${api.common.version}")         String apiVersion;
     @Value("${api.common.title}")           String apiTitle;
