@@ -27,7 +27,7 @@ public class Ticket {
     @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId id;
     private LocalDateTime bookedDateTime;
-    private LocalDateTime travelDateTime;
+    private LocalDate travelDateTime;
     private double amount;
     private String source;
     private String destination;

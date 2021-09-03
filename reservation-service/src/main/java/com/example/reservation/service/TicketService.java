@@ -1,14 +1,9 @@
 package com.example.reservation.service;
 
-import com.example.reservation.model.Ticket;
-import org.bson.types.ObjectId;
-
-import java.util.List;
+import com.example.reservation.rest.payloads.TicketPayload;
 
 public interface TicketService {
 
-    void bookNewTicket(Ticket ticket);
-    List<Ticket> getTickets(String user);
-    void cancelTicket(ObjectId ticketId);
+    TicketPayload bookNewTicket(TicketPayload ticketPayload);
 
 }
