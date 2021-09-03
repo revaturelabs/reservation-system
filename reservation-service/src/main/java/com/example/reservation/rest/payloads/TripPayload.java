@@ -16,7 +16,7 @@ public class TripPayload {
     @JsonFormat(pattern = "HH:mm")
     private LocalTime arrivalTime;
     private BusPayload bus;
-    private List<Integer> reservedSeats;
+    private int[] reservedSeats;
     private double price;
 
 }

@@ -15,7 +15,6 @@ public class Trip {
     private LocalTime depTime;
     @JsonFormat(pattern = "HH:mm")
     private LocalTime arrivalTime;
-    @DBRef
     private Bus bus;
 
 }

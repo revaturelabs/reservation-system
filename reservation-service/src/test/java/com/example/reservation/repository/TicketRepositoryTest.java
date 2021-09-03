@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class TicketRepositoryTest {
     public void beforeEach(){
         Ticket ticket=new Ticket();
         ticket.setBookedDateTime(LocalDateTime.now());
-        ticket.setTravelDateTime(LocalDateTime.of(2021,9,1,22,30));
+        ticket.setTravelDateTime(LocalDate.of(2021,9,1));
         ticket.setAmount(950);
         ticket.setSource("BENGALURU");
         ticket.setDestination("CHENNAI");
