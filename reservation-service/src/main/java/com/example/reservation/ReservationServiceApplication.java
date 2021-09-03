@@ -45,13 +45,13 @@ public class ReservationServiceApplication implements CommandLineRunner {
 //        System.out.println("Sending Email...");
 //        emailService.sendEmail("nagcloudlab@gmail.com","hello123","this test email");
 //        System.out.println("Done");
-
-        ReservedSeats reservedSeats=new ReservedSeats();
-        reservedSeats.setDate(LocalDate.now());
-        reservedSeats.setBus(busRepository.findById("1212").get());
-        reservedSeats.setReservedSeats(List.of(12,13));
-
-        reservedSeatsRepository.save(reservedSeats);
+//
+//        ReservedSeats reservedSeats=new ReservedSeats();
+//        reservedSeats.setDate(LocalDate.now());
+//        reservedSeats.setBus(busRepository.findById("1212").get());
+//        reservedSeats.setReservedSeats(List.of(12,13));
+//
+//        reservedSeatsRepository.save(reservedSeats);
 
     }
 
