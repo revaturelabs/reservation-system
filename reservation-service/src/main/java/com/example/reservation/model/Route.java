@@ -18,15 +18,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class Route {
-
     @Id
-    private ObjectId id;
+    private String id;
     private String source;
     private String destination;
     private int distance;
-    private LocalTime depTime;
-    private LocalTime arrivalTime;
-    private List<StopPoint> stopPoints;
-    @DBRef
-    private List<Bus> busList=new ArrayList<>();
+    private List<Trip> tripList=new ArrayList<>();
 }
