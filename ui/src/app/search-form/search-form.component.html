@@ -1,0 +1,60 @@
+<mat-card>
+  <form
+    class="example-form"
+    (submit)="handleSearch($event)"
+    [formGroup]="searchFormGroup"
+  >
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Source</mat-label>
+      <input
+        type="text"
+        placeholder="Pick one"
+        matInput
+        formControlName="source"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    &nbsp;
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Destination</mat-label>
+      <input
+        type="text"
+        placeholder="Pick one"
+        matInput
+        formControlName="destination"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    &nbsp;
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Destination</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="travelDate" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+</mat-card>

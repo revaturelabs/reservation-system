@@ -1,0 +1,18 @@
+<div *ngFor="let trip of route.tripList">
+  <mat-card>
+    <mat-grid-list cols="6" rowHeight="4:1">
+      <mat-grid-tile>{{ trip.id }}</mat-grid-tile>
+      <mat-grid-tile>
+        {{ trip.depTime | date: 'HH:mm' }}
+        {{ trip.arrivalTime | date: 'HH:mm' }}
+      </mat-grid-tile>
+      <mat-grid-tile>{{ trip.bus.name }}</mat-grid-tile>
+      <mat-grid-tile>{{ 40 - trip.reservedSeats.length }}</mat-grid-tile>
+      <mat-grid-tile>{{ trip.price | currency }}</mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-raised-button color="primary">View Seats</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+  <mat-divider></mat-divider>
+</div>

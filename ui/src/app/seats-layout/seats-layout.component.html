@@ -1,0 +1,11 @@
+<mat-card class="example-card">
+  <div *ngFor="let r of [1, 2, 3, 4, 5, 6, 7, 8, 10]">
+    <mat-grid-list cols="4" rowHeight="4:1">
+      <mat-grid-tile *ngFor="let c of [1, 2, 3, 4]">
+        <mat-icon>chair</mat-icon>
+        <br />
+        {{ r * c }}
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</mat-card>
