@@ -3,6 +3,7 @@ package com.example.reservation.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,12 @@ import com.example.reservation.rest.payloads.UserPayload;
 @Service
 public class UserServiceImpl implements UserService {
 
+
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Override
 	public User addNewUser(User user) {
@@ -34,16 +39,7 @@ public class UserServiceImpl implements UserService {
 		List<User> users = userRepository.findAll();
 		List<UserPayload> usersPaylaods = new ArrayList<>();
 		for(User user:users) {
-			UserPayload userPayload = new UserPayload();
-			userPayload.setName(user.getName());
-			userPayload.setEmail(user.getEmail());
-			userPayload.setMobile(user.getMobile());
-			userPayload.setDob(user.getDob());
-			userPayload.setGender(user.getGender());
-			userPayload.setAvatar(user.getAvatar());
-			userPayload.setAddress(user.getAddress());
-			userPayload.setIdProof(user.getIdProof());
-			userPayload.setTravellers(user.getTravellers());
+			UserPayload userPayload=modelMapper.map(user,UserPayload.class);
 			usersPaylaods.add(userPayload);
 		}
 		return usersPaylaods;
@@ -52,38 +48,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserPayload getUserByEmail(String email) {
 		User user = userRepository.findByEmail(email);
-
-		UserPayload userPayload = new UserPayload();
-		userPayload.setName(user.getName());
-		userPayload.setEmail(user.getEmail());
-		userPayload.setMobile(user.getMobile());
-		userPayload.setDob(user.getDob());
-		userPayload.setGender(user.getGender());
-		userPayload.setAvatar(user.getAvatar());
-		userPayload.setAddress(user.getAddress());
-		userPayload.setIdProof(user.getIdProof());
-		userPayload.setTravellers(user.getTravellers());
-
+		UserPayload userPayload=modelMapper.map(user,UserPayload.class);
 		return userPayload;
 
 	}
 
 	@Override
-	public UserPayload getUserByMobile(String mobile) {
-		User user = userRepository.findByMobile(mobile);
-
-		UserPayload userPayload = new UserPayload();
-		userPayload.setName(user.getName());
-		userPayload.setEmail(user.getEmail());
-		userPayload.setMobile(user.getMobile());
-		userPayload.setDob(user.getDob());
-		userPayload.setGender(user.getGender());
-		userPayload.setAvatar(user.getAvatar());
-		userPayload.setAddress(user.getAddress());
-		userPayload.setIdProof(user.getIdProof());
-		userPayload.setTravellers(user.getTravellers());
-
-		return userPayload;
-
+	public List<UserPayload> getUserByMobile(String mobile) {
+		List<User> users = userRepository.findByMobile(mobile);
+		List<UserPayload> usersPaylaods = new ArrayList<>();
+		for(User user:users) {
+			UserPayload userPayload=modelMapper.map(user,UserPayload.class);
+			usersPaylaods.add(userPayload);
+		}
+		return usersPaylaods;
 	}
 }

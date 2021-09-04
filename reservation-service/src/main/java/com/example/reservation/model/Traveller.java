@@ -13,4 +13,5 @@ public class Traveller {
     private IdProof idProof;
     private int age;
     private boolean disabled;
+    private int seatNumber;
 }

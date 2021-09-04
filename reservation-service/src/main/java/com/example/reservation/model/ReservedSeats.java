@@ -23,7 +23,7 @@ public class ReservedSeats {
     @Id
     ObjectId id;
     private LocalDate date;
-    private int[] reservedSeats;
+    private int[] reservedSeats={};
     @DBRef
     private Bus bus;
 

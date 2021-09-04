@@ -43,12 +43,6 @@ public class UserRepositoryTest {
 
 
     @Test
-    public void getByMobile(){
-        User user= userRepository.findByMobile("1234567890").orElse(null);
-        assertNotNull(user);
-    }
-
-    @Test
     public void addNewTravllers(){
 
         Traveller traveller1=new Traveller();

@@ -39,8 +39,8 @@ public class TicketRepositoryTest {
         ticket.setStatus(TicketStatus.CONIFRMED);
 
         List<Traveller> travellers=List.of(
-                new Traveller("Nag",new IdProof("adahar","1212-1212-1212-1212"),38,false),
-                new Traveller("Indu",new IdProof("adahar","4344-3434-3434-3434"),33,false)
+                new Traveller("Nag",new IdProof("adahar","1212-1212-1212-1212"),38,false,0),
+                new Traveller("Indu",new IdProof("adahar","4344-3434-3434-3434"),33,false,0)
         );
 
         ticket.setTravellers(travellers);

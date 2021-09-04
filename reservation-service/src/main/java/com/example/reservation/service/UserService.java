@@ -11,6 +11,7 @@ public interface UserService {
    User addNewUser(User user);
    List<UserPayload> getAll();
    UserPayload getUserByEmail(String email);
-   UserPayload getUserByMobile(String mobile);
+   List<UserPayload> getUserByMobile(String mobile);
+
 
 }
