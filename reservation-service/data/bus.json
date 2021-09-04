@@ -1,0 +1,11 @@
+{
+  "number": "1",
+  "name": "bus1",
+  "type": "NON-AC",
+  "seatType": "CHAIR",
+  "seats": 40,
+  "contact": {
+    "name": "bus1-contact1",
+    "mobile": "1234567891"
+  }
+}

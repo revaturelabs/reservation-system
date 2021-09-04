@@ -1,11 +1,27 @@
-<mat-card class="example-card">
-  <div *ngFor="let r of [1, 2, 3, 4, 5, 6, 7, 8, 10]">
-    <mat-grid-list cols="4" rowHeight="4:1">
-      <mat-grid-tile *ngFor="let c of [1, 2, 3, 4]">
-        <mat-icon>chair</mat-icon>
-        <br />
-        {{ r * c }}
-      </mat-grid-tile>
-    </mat-grid-list>
+<div class="row">
+  <div class="col-6">
+    <mat-card class="example-card">
+      <div *ngFor="let r of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">
+        <mat-grid-list cols="4" rowHeight="7:3">
+          <mat-grid-tile
+            (click)="handleSeatSelect(r + c)"
+            *ngFor="let c of [0, 10, 20, 30]"
+          >
+            <mat-icon
+              [ngStyle]="{
+                color: getColor(r + c),
+                cursor: 'pointer'
+              }"
+            >
+              chair
+            </mat-icon>
+            <br />
+            {{ r + c }}
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-card>
+    &nbsp;
+    <mat-card>Selected Seats : {{ selectedSeats.join(',') }}</mat-card>
   </div>
-</mat-card>
+</div>

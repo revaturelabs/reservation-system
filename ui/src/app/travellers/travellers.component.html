@@ -1,0 +1,54 @@
+<mat-card>
+  <div class="row">
+    <div class="col-10">
+      <form [formGroup]="travellersFormGroup" (submit)="handleSubmit($event)">
+        <ng-container formArrayName="travellers">
+          <ng-container
+            *ngFor="let traveller of travellers.controls; let idx = index"
+          >
+            <div class="form-group">
+              <form [formGroup]="traveller">
+                <div class="input-group mb-3">
+                  <input
+                    class="form-control"
+                    placeholder="Name"
+                    formControlName="name"
+                  />
+                  <input
+                    class="form-control"
+                    placeholder="Age"
+                    formControlName="age"
+                    size="3"
+                  />
+                  <select class="form-control" formControlName="gender">
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                  </select>
+                  <select class="form-control" formControlName="idProof">
+                    <option value="adhar">Adhar</option>
+                    <option value="dl">Driving License</option>
+                    <option value="pan">PAN</option>
+                    <option value="voter">Voter ID</option>
+                    <option value="passport">Passport</option>
+                  </select>
+                  <input
+                    class="form-control"
+                    placeholder="ID number"
+                    formControlName="idNumber"
+                  />
+                  <select class="form-control" formControlName="disablity">
+                    <option value="false">False</option>
+                    <option value="true">True</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+          </ng-container>
+        </ng-container>
+        <br />
+
+        <button>submit</button>
+      </form>
+    </div>
+  </div>
+</mat-card>
