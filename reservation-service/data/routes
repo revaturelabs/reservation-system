@@ -1,0 +1,48 @@
+[{
+  "_id": "1",
+  "source": "chennai",
+  "destination": "bengaluru",
+  "distance": 330,
+  "tripList": [
+    {
+      "_id": "CHNBNG2030",
+      "depTime": {
+        "$date": "2021-09-04T15:00:00Z"
+      },
+      "arrivalTime": {
+        "$date": "2021-09-04T17:00:00Z"
+      },
+      "bus": {
+        "$ref": "buses",
+        "$id": "1"
+      }
+    },
+    {
+      "_id": "CHNBNG2330",
+      "depTime": {
+        "$date": "2021-09-04T18:00:00Z"
+      },
+      "arrivalTime": {
+        "$date": "2021-09-04T00:00:00Z"
+      },
+      "bus": {
+        "$ref": "buses",
+        "$id": "2"
+      }
+    },
+    {
+      "_id": "CHNBNG2345",
+      "depTime": {
+        "$date": "2021-09-04T18:15:00Z"
+      },
+      "arrivalTime": {
+        "$date": "2021-09-04T01:00:00Z"
+      },
+      "bus": {
+        "$ref": "buses",
+        "$id": "3"
+      }
+    }
+  ],
+  "_class": "com.example.reservation.model.Route"
+}]

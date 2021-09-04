@@ -117,8 +117,11 @@ public class RouteServiceImpl implements RouteService{
 
 
             ReservedSeats reservedSeats=reservedSeatsRepository.findReservedSeats(date,trip.getBus().getNumber());
-            tripPayload.setReservedSeats(reservedSeats.getReservedSeats());
-
+            if(reservedSeats==null){
+             tripPayload.setReservedSeats(new int[]{});
+            }else {
+                tripPayload.setReservedSeats(reservedSeats.getReservedSeats());
+            }
             tripPayloads.add(tripPayload);
 
         }

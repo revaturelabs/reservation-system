@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="selectedSeats.length > 0">
   <div class="row">
     <div class="col-10">
       <form [formGroup]="travellersFormGroup" (submit)="handleSubmit($event)">
@@ -47,7 +47,7 @@
         </ng-container>
         <br />
 
-        <button>submit</button>
+        <button>Book Ticket</button>
       </form>
     </div>
   </div>
