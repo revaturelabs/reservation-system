@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core'
-
+import { Component, Inject, OnInit } from '@angular/core'
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog'
 @Component({
   selector: 'app-seats-layout',
   templateUrl: './seats-layout.component.html',
@@ -7,7 +11,7 @@ import { Component, OnInit } from '@angular/core'
 })
 export class SeatsLayoutComponent implements OnInit {
   selectedSeats: Array<Number> = []
-  reservedSeats: Array<Number> = [12, 13]
+  reservedSeats: Array<Number> = []
 
   handleSeatSelect(seatNumber: number): void {
     let idx = this.selectedSeats.indexOf(seatNumber)
@@ -32,7 +36,10 @@ export class SeatsLayoutComponent implements OnInit {
     } else return ''
   }
 
-  constructor() {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.reservedSeats = this.data.reservedSeats
+    this.selectedSeats = this.data.selectedSeats
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
+import { RouteService } from '../route.service'
 
 @Component({
   selector: 'app-travellers',
@@ -7,6 +8,8 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
   styleUrls: ['./travellers.component.scss'],
 })
 export class TravellersComponent implements OnInit {
+  selectedSeats = []
+
   travellersFormGroup: FormGroup = this.fb.group({
     travellers: this.fb.array([]),
   })
@@ -16,21 +19,28 @@ export class TravellersComponent implements OnInit {
   }
 
   handleSubmit(event: Event): void {
-    console.log(this.travellersFormGroup.value)
+    this.routeService.setTravellers(this.travellersFormGroup.value.travellers)
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private routeService: RouteService) {}
 
   ngOnInit() {
-    const traveller: FormGroup = this.fb.group({
-      name: [''],
-      age: [0],
-      gender: [''],
-      idProof: [''],
-      idNumber: [''],
-      disablity: ['false'],
+    this.routeService.seatsStream.subscribe((data: any) => {
+      if (data.selectedSeats) {
+        this.selectedSeats = data.selectedSeats
+        this.travellers.clear()
+        for (let seat of data.selectedSeats) {
+          const traveller: FormGroup = this.fb.group({
+            name: [''],
+            age: [0],
+            gender: [''],
+            idProof: [''],
+            idNumber: [''],
+            disablity: ['false'],
+          })
+          this.travellers.push(traveller)
+        }
+      }
     })
-    this.travellers.push(traveller)
-    this.travellers.push(traveller)
   }
 }

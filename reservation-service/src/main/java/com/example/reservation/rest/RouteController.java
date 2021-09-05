@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/routes")
 public class RouteController {

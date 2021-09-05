@@ -1,18 +1,27 @@
-<div *ngFor="let trip of route.tripList">
-  <mat-card>
-    <mat-grid-list cols="6" rowHeight="4:1">
-      <mat-grid-tile>{{ trip.id }}</mat-grid-tile>
-      <mat-grid-tile>
-        {{ trip.depTime | date: 'HH:mm' }}
-        {{ trip.arrivalTime | date: 'HH:mm' }}
-      </mat-grid-tile>
-      <mat-grid-tile>{{ trip.bus.name }}</mat-grid-tile>
-      <mat-grid-tile>{{ 40 - trip.reservedSeats.length }}</mat-grid-tile>
-      <mat-grid-tile>{{ trip.price | currency }}</mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-raised-button color="primary">View Seats</button>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-card>
-  <mat-divider></mat-divider>
-</div>
+<mat-card *ngIf="trips.length !== 0">
+  <div *ngFor="let trip of trips">
+    <mat-card>
+      <mat-grid-list cols="6" rowHeight="4:1">
+        <mat-grid-tile>{{ trip.id }}</mat-grid-tile>
+        <mat-grid-tile>
+          {{ trip.depTime }}
+          -
+          {{ trip.arrTime }}
+        </mat-grid-tile>
+        <mat-grid-tile>{{ trip.name }}</mat-grid-tile>
+        <mat-grid-tile>{{ seats }}</mat-grid-tile>
+        <mat-grid-tile>{{ trip.price | currency: 'INR' }}</mat-grid-tile>
+        <mat-grid-tile>
+          <button
+            (click)="viewSeats(trip.id)"
+            mat-raised-button
+            color="primary"
+          >
+            View Seats
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+    <br />
+  </div>
+</mat-card>

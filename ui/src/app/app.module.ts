@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component'
 import { SearchFormComponent } from './search-form/search-form.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { MatModule } from './mat.module'
+
 import { MatNativeDateModule } from '@angular/material/core';
 import { RouteTripsComponent } from './route-trips/route-trips.component';
 import { SeatsLayoutComponent } from './seats-layout/seats-layout.component';
@@ -21,10 +23,25 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [AppComponent, SearchFormComponent, RouteTripsComponent, SeatsLayoutComponent, LoginFormComponent, RegisterFormComponent],
+  declarations: [AppComponent, SearchFormComponent, RouteTripsComponent, SeatsLayoutComponent],
+
+import { MatNativeDateModule } from '@angular/material/core'
+import { RouteTripsComponent } from './route-trips/route-trips.component'
+import { SeatsLayoutComponent } from './seats-layout/seats-layout.component'
+import { TravellersComponent } from './travellers/travellers.component'
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    SearchFormComponent,
+    RouteTripsComponent,
+    SeatsLayoutComponent,
+    TravellersComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),

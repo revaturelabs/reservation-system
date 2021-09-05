@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core'
+import { RouteService } from '../route.service'
+import * as moment from 'moment'
+import { MatDialog } from '@angular/material/dialog'
+import { SeatsLayoutComponent } from '../seats-layout/seats-layout.component'
 
 @Component({
   selector: 'app-route-trips',
@@ -6,52 +10,47 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./route-trips.component.scss'],
 })
 export class RouteTripsComponent implements OnInit {
-  constructor() {}
+  route = null
+  trips: Array<any> = []
+  ngOnInit(): void {
+    this.routeService.routeStream.subscribe((route: any) => {
+      this.route = route
+      if (route.tripList)
+        for (let trip of route.tripList) {
+          var dep = moment(trip.depTime, 'dd/MM/yyyy HH:mm')
+          var arr = moment(trip.arrivalTime, 'dd/MM/yyyy HH:mm')
+          var duration = moment.duration(arr.diff(dep))
 
-  route = {
-    id: '1',
-    source: 's1',
-    destination: 'd1',
-    distance: 100,
-    tripList: [
-      {
-        id: 'CHNBNG1',
-        depTime: Date.now(),
-        arrivalTime: Date.now(),
-        bus: {
-          number: '1212',
-          name: 'bus1',
-          type: 'AC',
-          seatType: 'CHAIR',
-          seats: 40,
-          contact: {
-            name: 'c1',
-            mobile: '1234567890',
-          },
-        },
-        reservedSeats: [1, 2],
-        price: 900,
-      },
-      {
-        id: 'CHNBNG2',
-        depTime: Date.now(),
-        arrivalTime: Date.now(),
-        bus: {
-          number: '1213',
-          name: 'bus1',
-          type: 'AC',
-          seatType: 'CHAIR',
-          seats: 40,
-          contact: {
-            name: 'c1',
-            mobile: '1234567890',
-          },
-        },
-        reservedSeats: [1, 2],
-        price: 900,
-      },
-    ],
+          const tripRow = {
+            id: trip.id,
+            depTime: dep.hours() + ':' + dep.minutes(),
+            arrTime: arr.hours() + ':' + arr.minutes(),
+            travelDuration: duration,
+            name: trip.bus.name,
+            seats: 40 - trip.reservedSeats,
+            price: trip.price,
+            reservedSeats: [1],
+          }
+          this.trips.push(tripRow)
+        }
+    })
   }
 
-  ngOnInit(): void {}
+  viewSeats(tripId: string) {
+    const dialogRef = this.dialog.open(SeatsLayoutComponent, {
+      width: '70%',
+      height: '80%',
+      data: {
+        reservedSeats: [1],
+        selectedSeats: this.routeService.selectedSeats,
+      },
+    })
+    dialogRef.afterClosed().subscribe((seats) => {
+      if (seats) {
+        this.routeService.setTripWithSeats(tripId, seats)
+      }
+    })
+  }
+
+  constructor(public routeService: RouteService, public dialog: MatDialog) {}
 }
