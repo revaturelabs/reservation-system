@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
-public class AppUserDetails implements UserDetailsService {
+public class ReservationSystemUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
@@ -22,14 +22,13 @@ public class AppUserDetails implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Optional<com.example.reservation.model.User> optional = userRepository.findById(s);
         com.example.reservation.model.User dbUser = optional.orElseThrow(() -> new UsernameNotFoundException(s));
-
-//        String[] authorities=dbUser
-//                .getAuthorities()
-//                .stream()
-//                .toArray(String[]::new);
-
-        User user =new User(dbUser.getEmail(),dbUser.getPassword(), new ArrayList<>());
-
+        String[] authorities={};
+        if(s.equals("revature@email.com")){
+            authorities=new String[]{"ADMIN","USER"};
+        }else{
+            authorities=new String[]{"USER"};
+        }
+        User user =new User(dbUser.getEmail(),dbUser.getPassword(), AuthorityUtils.createAuthorityList(authorities));
         return user;
     }
 }

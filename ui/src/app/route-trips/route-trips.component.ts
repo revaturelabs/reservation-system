@@ -18,20 +18,23 @@ export class RouteTripsComponent implements OnInit {
       this.route = route
       if (route.tripList)
         for (let trip of route.tripList) {
-          var dep = moment(trip.depTime, 'dd/MM/yyyy HH:mm')
-          var arr = moment(trip.arrivalTime, 'dd/MM/yyyy HH:mm')
+          var dep = moment(trip.depTime, 'HH:mm')
+          var arr = moment(trip.arrivalDateTime, 'dd/MM/yyyy HH:mm')
           var duration = moment.duration(arr.diff(dep))
-
+          console.log(duration)
           const tripRow = {
             id: trip.id,
             depTime: dep.hours() + ':' + dep.minutes(),
             arrTime: arr.hours() + ':' + arr.minutes(),
             travelDuration: duration,
             name: trip.bus.name,
-            seats: 40 - trip.reservedSeats,
+            seats: 40 - trip.reservedSeats.length,
             price: trip.price,
             reservedSeats: trip.reservedSeats,
           }
+
+          console.log(tripRow)
+
           this.trips.push(tripRow)
         }
     })

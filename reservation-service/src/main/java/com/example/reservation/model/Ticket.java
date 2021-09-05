@@ -1,6 +1,7 @@
 package com.example.reservation.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -34,10 +35,10 @@ public class Ticket {
     private int[] seatNumbers;
     private TicketStatus status;
     private List<Traveller> travellers;
+    @JsonIgnore
     @DBRef(lazy = true)
     private Bus bus;
     @DBRef(lazy = true)
+    @JsonIgnore
     private User user;
-//    @DBRef
-//    private Payment payment;
 }

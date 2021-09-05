@@ -17,9 +17,9 @@ export class SearchFormComponent implements OnInit {
 
   ngOnInit() {
     this.searchFormGroup = this.fb.group({
-      source: ['', [Validators.required]],
-      destination: ['', [Validators.required]],
-      travelDate: ['', [Validators.required]],
+      source: ['chennai', [Validators.required]],
+      destination: ['bengaluru', [Validators.required]],
+      travelDate: [new Date(2021, 9, 5), [Validators.required]],
     })
     this.filteredOptions = this.searchFormGroup.controls[
       'source'

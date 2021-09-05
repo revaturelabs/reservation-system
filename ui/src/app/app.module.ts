@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { RouterModule, Routes } from '@angular/router'
 
 import { AppComponent } from './app.component'
@@ -18,10 +18,20 @@ import { LoginFormComponent } from './login-form/login-form.component'
 import { RegisterFormComponent } from './register-form/register-form.component'
 import { BookingComponent } from './booking/booking.component'
 import { TravellersFormComponent } from './travellers-form/travellers-form.component'
+import { TokenInterceptorService } from './token-interceptor.service'
+import { BookingHistoryComponent } from './booking-history/booking-history.component'
+import { NavbarComponent } from './navbar/navbar.component'
+import { AuthGuard } from './auth.guard';
+import { MessageComponent } from './message/message.component'
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'booking' },
   { path: 'booking', component: BookingComponent },
+  {
+    path: 'booking-history',
+    component: BookingHistoryComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegisterFormComponent },
 ]
@@ -36,6 +46,9 @@ const routes: Routes = [
     BookingComponent,
     LoginFormComponent,
     RegisterFormComponent,
+    BookingHistoryComponent,
+    NavbarComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +60,13 @@ const routes: Routes = [
     MatNativeDateModule,
     MatModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
 package com.example.reservation.model;
 
 public enum TicketStatus {
-    CONIFRMED,CANCELED
+    PAYMENT_PENDING, CONIFRMED,CANCELED
 }

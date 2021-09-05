@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs'
 
 @Injectable({
@@ -65,9 +66,16 @@ export class RouteService {
 
     const api = 'http://localhost:8080/api/tickets'
     this.httpClient.post(api, ticketPayload).subscribe((response) => {
-      console.log(response)
+      this.routeId = null
+      this.selectedTripId = null
+      this.selectedSeats = []
+      this.travellers = []
+      this.travelDate = null
+      this.routeStream.next({})
+      this.seatsStream.next({})
+      this.router.navigate(['/booking-history'])
     })
   }
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 }

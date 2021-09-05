@@ -1,23 +1,29 @@
-<header id="showcase">
-    <div class="container">
-        <form [formGroup]="loginForm">
-            <mat-card class="offset-6 col-4" style="background-color: rgb(153, 164, 168)">
-                <mat-card-title>Login</mat-card-title>
-                <mat-card-content>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input class="form-control" formControlName="email" placeholder="Enter your email" />
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input class="form-control" type="password" formControlName="password" placeholder="Enter your password" />
-                    </div>
-                    <br>
-                    <button mat-raised-button color="primary" (click)="handleLogin()">Login</button>&nbsp;&nbsp;
-                    <button mat-raised-button color="warn" (click)="handleRegister()">Register</button>
-                    <br>
-                </mat-card-content>
-            </mat-card>
-        </form>
-    </div>
-</header>
+<mat-card>
+  <form [formGroup]="loginForm" (submit)="handleLogin($event)">
+    <mat-form-field
+      class="example-full-width"
+      style="width: 40%;"
+      appearance="fill"
+    >
+      <mat-label>Email</mat-label>
+      <input type="text" placeholder="Email" matInput formControlName="email" />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      class="example-full-width"
+      style="width: 40%;"
+      appearance="fill"
+    >
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        placeholder="Password"
+        matInput
+        formControlName="password"
+      />
+    </mat-form-field>
+    <br />
+
+    <button mat-raised-button color="primary">Login</button>
+  </form>
+</mat-card>

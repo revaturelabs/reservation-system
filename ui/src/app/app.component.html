@@ -1,3 +1,53 @@
 <div class="container">
+  <app-navbar></app-navbar>
+  <hr />
+
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" [routerLink]="['booking']">
+        New-booking
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        routerLinkActive="active"
+        [routerLink]="['booking-history']"
+      >
+        Booking-history
+      </a>
+    </li>
+    <ng-container *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['login']">
+          Login
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLinkActive="active"
+          [routerLink]="['register']"
+        >
+          Register
+        </a>
+      </li>
+    </ng-container>
+    <ng-container *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          (click)="handleLogout($event)"
+          routerLinkActive="active"
+          href
+        >
+          Logout
+        </a>
+      </li>
+    </ng-container>
+  </ul>
+
+  <hr />
+  <br />
   <router-outlet></router-outlet>
 </div>

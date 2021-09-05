@@ -1,10 +1,8 @@
 package com.example.reservation.service;
 
+import com.example.reservation.email.MailService;
 import com.example.reservation.model.*;
-import com.example.reservation.repository.PriceRepository;
-import com.example.reservation.repository.ReservedSeatsRepository;
-import com.example.reservation.repository.RouteRepository;
-import com.example.reservation.repository.TicketRepository;
+import com.example.reservation.repository.*;
 import com.example.reservation.rest.payloads.TicketPayload;
 import com.example.reservation.rest.payloads.TravellerPayload;
 import org.bson.types.ObjectId;
@@ -13,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -41,6 +41,11 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     RouteRepository routeRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    MailService mailService;
 
     @Override
     public TicketPayload bookNewTicket(TicketPayload ticketPayload) {
@@ -68,7 +73,6 @@ public class TicketServiceImpl implements TicketService {
             tripPrice += 300;
         }
 
-
         List<TravellerPayload> travellerList = ticketPayload.getTravellers();
 
         for (TravellerPayload traveller : travellerList) {
@@ -88,7 +92,14 @@ public class TicketServiceImpl implements TicketService {
             totalPrice += travellerTickerPrice;
         }
 
+
         Ticket ticket = new Ticket();
+
+        SecurityContext context = SecurityContextHolder.getContext();
+        String userEmail=context.getAuthentication().getName();
+        User user=userRepository.findById(userEmail).get();
+        ticket.setUser(user);
+
         ticket.setSource(route.getSource());
         ticket.setDestination(route.getDestination());
         ticket.setBus(bus);
@@ -104,12 +115,10 @@ public class TicketServiceImpl implements TicketService {
         ticket.setTravellers(travellers);
 
         ticket.setTravelDateTime(ticketPayload.getTravelDate());
-        ticket.setUser(null);
         ticket.setSeatNumbers(ticketPayload.getSeatNumbers());
         ticket.setBookedDateTime(LocalDateTime.now());
         ticket.setStatus(TicketStatus.CONIFRMED);
         ticket.setAmount(totalPrice);
-
 
 
         ReservedSeats reservedSeats = reservedSeatsRepository.findReservedSeats(ticketPayload.getTravelDate().plusDays(1), bus.getNumber());
@@ -126,10 +135,21 @@ public class TicketServiceImpl implements TicketService {
         reservedSeats.setReservedSeats(rSeats);
 
         reservedSeatsRepository.save(reservedSeats);
+
         Ticket savedTicket=ticketRepository.save(ticket);
+
+        // send an email
+        mailService.sendEmail(userEmail,"Ticket booking confirmed",ticketPayload.getTripId());
 
         return modelMapper.map(savedTicket,TicketPayload.class);
 
     }
 
+
+    @Override
+    public List<Ticket> getTickets() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        String userEmail=context.getAuthentication().getName();
+        return ticketRepository.findAll(userEmail);
+    }
 }

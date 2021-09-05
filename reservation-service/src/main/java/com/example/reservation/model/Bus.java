@@ -16,7 +16,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class Bus {
 
-
     @Id
     private String number;
     private String name;

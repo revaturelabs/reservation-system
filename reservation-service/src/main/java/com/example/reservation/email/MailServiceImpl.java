@@ -34,6 +34,7 @@ public class MailServiceImpl implements MailService {
     public void sendEmail(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@example.com");
+        System.out.println(to);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);

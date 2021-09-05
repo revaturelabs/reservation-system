@@ -7,6 +7,8 @@ import com.example.reservation.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -28,7 +30,7 @@ public class RouteController {
     public ResponseEntity<?> get(
             @PathVariable("source") String source,
             @PathVariable("destination") String destination,
-             @PathVariable("travelDate") String travelDate
+            @PathVariable("travelDate") String travelDate
     ){
         LocalDate localDate=LocalDate.parse(travelDate,formatter);
         System.out.println(localDate);
