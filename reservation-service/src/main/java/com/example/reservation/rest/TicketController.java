@@ -3,6 +3,8 @@ package com.example.reservation.rest;
 import com.example.reservation.rest.payloads.TicketPayload;
 import com.example.reservation.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
@@ -14,8 +16,9 @@ public class TicketController {
     private TicketService ticketService;
 
     @PostMapping
-    public void bookNewTicket(@RequestBody TicketPayload ticketPayload){
-        ticketService.bookNewTicket(ticketPayload);
+    public ResponseEntity<?> bookNewTicket(@RequestBody TicketPayload ticketPayload){
+        TicketPayload ticketResponsePayload= ticketService.bookNewTicket(ticketPayload);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(ticketResponsePayload);
     }
 
 }

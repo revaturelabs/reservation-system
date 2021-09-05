@@ -27,7 +27,7 @@ public class UserRepositoryTest {
         user.setDob(LocalDate.now());
         user.setGender(Gender.MALE);
         user.setAvatar("user1.jpg");
-        user.setAddress(new Address());
+        //user.setAddress(new Address());
         IdProof  idProof=new IdProof();
         idProof.setType("adhar");
         idProof.setNumber("1243-2122-3434");

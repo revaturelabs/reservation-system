@@ -111,10 +111,12 @@ public class TicketServiceImpl implements TicketService {
         ticket.setAmount(totalPrice);
 
 
-        ReservedSeats reservedSeats = reservedSeatsRepository.findReservedSeats(ticketPayload.getTravelDate(), bus.getNumber());
+
+        ReservedSeats reservedSeats = reservedSeatsRepository.findReservedSeats(ticketPayload.getTravelDate().plusDays(1), bus.getNumber());
         if (reservedSeats == null) {
+            System.out.println("null");
             reservedSeats = new ReservedSeats();
-            reservedSeats.setDate(ticketPayload.getTravelDate());
+            reservedSeats.setTravelDate(ticketPayload.getTravelDate().plusDays(1));
             reservedSeats.setBus(bus);
         }
         int[] rSeats = new int[reservedSeats.getReservedSeats().length + ticketPayload.getSeatNumbers().length];
@@ -122,10 +124,12 @@ public class TicketServiceImpl implements TicketService {
         System.arraycopy(ticketPayload.getSeatNumbers(), 0, rSeats, reservedSeats.getReservedSeats().length, ticketPayload.getSeatNumbers().length);
 
         reservedSeats.setReservedSeats(rSeats);
-        reservedSeatsRepository.save(reservedSeats);
-        ticketRepository.save(ticket);
 
-        return ticketPayload;
+        reservedSeatsRepository.save(reservedSeats);
+        Ticket savedTicket=ticketRepository.save(ticket);
+
+        return modelMapper.map(savedTicket,TicketPayload.class);
+
     }
 
 }

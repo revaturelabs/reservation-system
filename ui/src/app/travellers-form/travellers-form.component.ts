@@ -3,11 +3,11 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
 import { RouteService } from '../route.service'
 
 @Component({
-  selector: 'app-travellers',
-  templateUrl: './travellers.component.html',
-  styleUrls: ['./travellers.component.scss'],
+  selector: 'app-travellers-form',
+  templateUrl: './travellers-form.component.html',
+  styleUrls: ['./travellers-form.component.scss'],
 })
-export class TravellersComponent implements OnInit {
+export class TravellersFormComponent implements OnInit {
   selectedSeats = []
 
   travellersFormGroup: FormGroup = this.fb.group({

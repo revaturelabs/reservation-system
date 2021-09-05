@@ -70,14 +70,16 @@ public class RouteServiceImpl implements RouteService{
     }
 
     @Override
-    public RoutePayload getRoute(LocalDate date, String source, String destination) {
-        Route dbRoute= routeRepository.find(source,destination);
+    public RoutePayload getRoute(LocalDate travelDate, String source, String destination) {
+
+        Route dbRoute= routeRepository.find(source,destination,travelDate);
 
         RoutePayload routePayload=new RoutePayload();
         routePayload.setId(dbRoute.getId());
         routePayload.setSource(dbRoute.getSource());
         routePayload.setDestination(dbRoute.getDestination());
         routePayload.setDistance(dbRoute.getDistance());
+        routePayload.setTravelDate(travelDate);
 
         List<Trip> trips=dbRoute.getTripList();
 
@@ -103,7 +105,7 @@ public class RouteServiceImpl implements RouteService{
             TripPayload tripPayload=new TripPayload();
             tripPayload.setId(trip.getId());
             tripPayload.setDepTime(trip.getDepTime());
-            tripPayload.setArrivalTime(trip.getArrivalTime());
+            tripPayload.setArrivalDateTime(trip.getArrivalTime());
             tripPayload.setPrice(tripPrice);
 
             BusPayload busPayload=new BusPayload();
@@ -115,8 +117,7 @@ public class RouteServiceImpl implements RouteService{
             busPayload.setContact(trip.getBus().getContact());
             tripPayload.setBus(busPayload);
 
-
-            ReservedSeats reservedSeats=reservedSeatsRepository.findReservedSeats(date,trip.getBus().getNumber());
+            ReservedSeats reservedSeats=reservedSeatsRepository.findReservedSeats(travelDate.plusDays(1),trip.getBus().getNumber());
             if(reservedSeats==null){
              tripPayload.setReservedSeats(new int[]{});
             }else {

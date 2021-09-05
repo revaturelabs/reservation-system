@@ -23,9 +23,14 @@
     </mat-card>
     &nbsp;
     <mat-card>Selected Seats : {{ selectedSeats.join(',') }}</mat-card>
-
+    <br />
     <div>
-      <button mat-button [mat-dialog-close]="selectedSeats" cdkFocusInitial>
+      <button
+        mat-raised-button
+        color="primary"
+        [mat-dialog-close]="selectedSeats"
+        cdkFocusInitial
+      >
         Add Travellers
       </button>
     </div>

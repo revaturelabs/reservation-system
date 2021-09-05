@@ -13,6 +13,7 @@ import com.example.reservation.rest.payloads.ResponseErrorPayload;
 import com.example.reservation.rest.payloads.UserPayload;
 import com.example.reservation.service.UserService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

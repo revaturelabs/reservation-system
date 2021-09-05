@@ -14,6 +14,7 @@ export class RouteTripsComponent implements OnInit {
   trips: Array<any> = []
   ngOnInit(): void {
     this.routeService.routeStream.subscribe((route: any) => {
+      this.trips = []
       this.route = route
       if (route.tripList)
         for (let trip of route.tripList) {
@@ -29,19 +30,19 @@ export class RouteTripsComponent implements OnInit {
             name: trip.bus.name,
             seats: 40 - trip.reservedSeats,
             price: trip.price,
-            reservedSeats: [1],
+            reservedSeats: trip.reservedSeats,
           }
           this.trips.push(tripRow)
         }
     })
   }
 
-  viewSeats(tripId: string) {
+  viewSeats(tripId: string, reservedSeats: any) {
     const dialogRef = this.dialog.open(SeatsLayoutComponent, {
       width: '70%',
       height: '80%',
       data: {
-        reservedSeats: [1],
+        reservedSeats: reservedSeats,
         selectedSeats: this.routeService.selectedSeats,
       },
     })

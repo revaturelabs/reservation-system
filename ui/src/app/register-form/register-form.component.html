@@ -1,22 +1,84 @@
-<header id="showcase">
-    <div class="container">
-        <form [formGroup]="registerForm">
-            <mat-card class="offset-6 col-4" style="background-color: rgb(153, 164, 168)">
-                <mat-card-title>Register</mat-card-title>
-                <mat-card-content>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input class="form-control" formControlName="email" placeholder="Enter your email" />
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input class="form-control" type="password" formControlName="password" placeholder="Enter your password" />
-                    </div>
-                    <br>
-                    <button mat-raised-button color="warn" (click)="handleRegister()">Register</button>
-                    <br>
-                </mat-card-content>
-            </mat-card>
-        </form>
-    </div>
-</header>
+<mat-card>
+  <form [formGroup]="registerForm" (submit)="handleRegister($event)">
+    <mat-form-field
+      class="example-full-width"
+      style="width: 40%;"
+      appearance="fill"
+    >
+      <mat-label>Email</mat-label>
+      <input type="text" placeholder="Email" matInput formControlName="email" />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      class="example-full-width"
+      style="width: 40%;"
+      appearance="fill"
+    >
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        placeholder="Password"
+        matInput
+        formControlName="password"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      class="example-full-width"
+      style="width: 40%;"
+      appearance="fill"
+    >
+      <mat-label>Name</mat-label>
+      <input type="text" placeholder="Name" matInput formControlName="name" />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      class="example-full-width"
+      style="width: 40%;"
+      appearance="fill"
+    >
+      <mat-label>Mobile</mat-label>
+      <input
+        type="text"
+        placeholder="Mobile"
+        matInput
+        formControlName="mobile"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      class="example-full-width"
+      style="width: 40%;"
+      appearance="fill"
+    >
+      <mat-label>DOB</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dob" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill" style="width: 40%;">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option [value]="gender" *ngFor="let gender of ['MALE', 'FEMALE']">
+          {{ gender }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br />
+    <mat-form-field
+      class="example-full-width"
+      appearance="fill"
+      style="width: 40%;"
+    >
+      <mat-label>Address</mat-label>
+      <textarea
+        matInput
+        placeholder="Ex. 100 Main St"
+        formControlName="address"
+      ></textarea>
+    </mat-form-field>
+    <br />
+    <button mat-raised-button color="primary">Register</button>
+  </form>
+</mat-card>

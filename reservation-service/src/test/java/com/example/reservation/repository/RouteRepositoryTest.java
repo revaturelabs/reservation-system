@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,7 +42,7 @@ public class RouteRepositoryTest {
 
     @Test
     public void getRouteBySourceAndDestinations(){
-        Route route=routeRepository.find("CHENNAI","BENGALURU");
+        Route route=routeRepository.find("CHENNAI","BENGALURU", LocalDate.now());
         assertNotNull(route);
     }
 

@@ -12,10 +12,10 @@ import java.util.List;
 public class TripPayload {
 
     private String id;
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime depTime;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime depTime;
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime arrivalTime;
+    private LocalDateTime arrivalDateTime;
     private BusPayload bus;
     private int[] reservedSeats;
     private double price;

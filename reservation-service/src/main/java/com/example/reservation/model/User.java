@@ -9,19 +9,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
 import java.util.List;
 
-@Document
+@Document(collection = "users")
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
 public class User {
     @Id
     private String email;
+    private String password;
     private String name;
     private String mobile;
     private LocalDate dob;
     private Gender gender;
     private String avatar;
-    private Address address;
+//    private Address address;
     private IdProof idProof;
     private List<Traveller> travellers;
 }

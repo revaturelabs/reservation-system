@@ -13,7 +13,7 @@
         <mat-grid-tile>{{ trip.price | currency: 'INR' }}</mat-grid-tile>
         <mat-grid-tile>
           <button
-            (click)="viewSeats(trip.id)"
+            (click)="viewSeats(trip.id, trip.reservedSeats)"
             mat-raised-button
             color="primary"
           >

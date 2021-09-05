@@ -12,8 +12,8 @@ import java.time.LocalTime;
 public class Trip {
 
     private String id;
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime depTime;
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime depTime;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime arrivalTime;
     @DBRef

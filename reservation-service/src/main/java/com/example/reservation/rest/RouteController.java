@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @CrossOrigin("*")
 @RestController
@@ -19,12 +20,19 @@ public class RouteController {
     @Autowired
     RouteService routeService;
 
-    @GetMapping("/{source}/{destination}")
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-M-yyyy");
+
+
+    @GetMapping("/{source}/{destination}/{travelDate}")
     public ResponseEntity<?> get(
             @PathVariable("source") String source,
-            @PathVariable("destination") String destination
+            @PathVariable("destination") String destination,
+             @PathVariable("travelDate") String travelDate
     ){
-        RoutePayload route=routeService.getRoute(LocalDate.now(),source,destination);
+        LocalDate localDate=LocalDate.parse(travelDate,formatter);
+        System.out.println(localDate);
+        RoutePayload route=routeService.getRoute(localDate,source,destination);
         return  ResponseEntity.status(HttpStatus.OK).body(route);
     }
 

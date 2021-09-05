@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ReservedSeatsRepository extends MongoRepository<ReservedSeats, ObjectId> {
 
-    @Query("{'$and':[ {'date':?0}, {'bus.number':?1} ] }")
-    ReservedSeats findReservedSeats(LocalDate date,String number);
+    @Query("{'$and':[ {'travelDate':?0}, {'bus.number':?1} ] }")
+    ReservedSeats findReservedSeats(LocalDate travelDate,String busNumber);
 
 }

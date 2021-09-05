@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 
-import { tap } from 'rxjs/operators'
-
 @Injectable({
   providedIn: 'root',
 })
@@ -14,15 +12,21 @@ export class RouteService {
   selectedTripId!: null | string
   selectedSeats: Array<number> = []
   travellers: Array<any> = []
+  travelDate!: null | string
 
   routeStream = new BehaviorSubject({})
   seatsStream = new BehaviorSubject({})
 
   getRoute(source: string, destination: string, travelDate: Date) {
     this.httpClient
-      .get(`${this.api}/${source}/${destination}/`)
+      .get(
+        `${this.api}/${source}/${destination}/${travelDate.getDate()}-${
+          travelDate.getMonth() + 1
+        }-${travelDate.getFullYear()}`,
+      )
       .subscribe((route: any) => {
         this.routeId = route.id
+        this.travelDate = route.travelDate
         this.routeStream.next(route)
       })
   }
@@ -37,14 +41,28 @@ export class RouteService {
   setTravellers(travellers: Array<any>) {
     this.travellers = travellers
 
-    // book ticket
+    let travellersReqPayload = []
+    for (let traveller of travellers) {
+      let t = {
+        name: traveller.name,
+        age: traveller.age,
+        disabled: traveller.disabled,
+        idProof: {
+          type: traveller.idProof,
+          number: traveller.idNumber,
+        },
+      }
+      travellersReqPayload.push(t)
+    }
+
     const ticketPayload = {
-      //travelDate: Date.now(),
+      travelDate: this.travelDate,
       routeId: this.routeId,
       tripId: this.selectedTripId,
       seatNumbers: this.selectedSeats,
-      travellers: this.travellers,
+      travellers: travellersReqPayload,
     }
+
     const api = 'http://localhost:8080/api/tickets'
     this.httpClient.post(api, ticketPayload).subscribe((response) => {
       console.log(response)

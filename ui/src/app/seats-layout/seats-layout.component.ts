@@ -14,6 +14,8 @@ export class SeatsLayoutComponent implements OnInit {
   reservedSeats: Array<Number> = []
 
   handleSeatSelect(seatNumber: number): void {
+    if (this.reservedSeats.indexOf(seatNumber) !== -1) return
+
     let idx = this.selectedSeats.indexOf(seatNumber)
     if (idx == -1) this.selectedSeats.push(seatNumber)
     else {
