@@ -20,7 +20,8 @@ springdoc:
   packagesToScan: com.example.reservation
   pathsToMatch: /**
 
-
+server:
+  port: 8081
 
 STRIPE_SECRET_KEY: sk_test_51JUP34SH554kPulbBG6RNDJmk9phIUAdKZ1ENhJ3v1kjh0IYF165TVzUjMrbLw8nzDxBEawQX2E9kMw01LIpbmKY00NIW19Zey
 STRIPE_PUBLIC_KEY: pk_test_51JUP34SH554kPulbT8WLN5oatFKrJP9ELWwY9mL1e7EzbcbQj2VqyhJn5JjeNXFAg9yx7oQAMgXk29U3ppZ5HaU400mqFmXvXJ

@@ -6,6 +6,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.reservation.exception.ResourceConflictExeception;
@@ -23,10 +24,14 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Override
 	public User addNewUser(User user) {
 		User newUser = null;
 		try {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			newUser = userRepository.insert(user);
 		} catch (DuplicateKeyException e) {
 			throw new ResourceConflictExeception("user already exist");
