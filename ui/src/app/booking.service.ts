@@ -13,13 +13,26 @@ export class BookingService {
 
   bookingStream = new BehaviorSubject(this.booking)
 
+  setNewBooking() {
+    this.booking = {}
+    this.bookingStream.next(this.booking)
+  }
+
+  getReservedSeats() {
+    return this.booking.trip.reservedSeats
+  }
+
   setTripWithSeats(tripId: string, seats: Array<number>): void {
     this.booking.tripId = tripId
     this.booking.trip = this.booking.route.tripList.find(
       (t: any) => t.id === tripId,
     )
     this.booking.seats = seats
-
+    this.booking.changeSeats = false
+    this.bookingStream.next(this.booking)
+  }
+  changeSeats() {
+    this.booking.changeSeats = true
     this.bookingStream.next(this.booking)
   }
   setTravellers(travellers: Array<any>) {
@@ -50,11 +63,10 @@ export class BookingService {
       seatNumbers: this.booking.seats,
       travellers: this.booking.travellers,
     }
-    const api = 'http://localhost:8080/api/tickets'
-    this.httpClient.post(api, ticketPayload).subscribe((response) => {
+    this.httpClient.post(this.api, ticketPayload).subscribe((response) => {
       this.booking = {}
-      this.bookingStream.next({})
-      this.router.navigate(['/booking-history'])
+      this.booking.ticketResponse = response
+      this.bookingStream.next(this.booking)
     })
   }
 

@@ -24,7 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component'
 import { AuthGuard } from './auth.guard'
 import { MessageComponent } from './message/message.component'
 import { BookingSummaryComponent } from './booking-summary/booking-summary.component'
-import { BookingFinalComponent } from './booking-final/booking-final.component'
+import { BookingFinalComponent } from './booking-final/booking-final.component';
+import { TicketViewComponent } from './ticket-view/ticket-view.component'
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'booking' },
@@ -57,6 +58,7 @@ const routes: Routes = [
     BookingHistoryComponent,
 
     MessageComponent,
+     TicketViewComponent,
   ],
   imports: [
     BrowserModule,

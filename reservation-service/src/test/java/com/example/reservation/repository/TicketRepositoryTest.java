@@ -31,11 +31,11 @@ public class TicketRepositoryTest {
     public void beforeEach(){
         Ticket ticket=new Ticket();
         ticket.setBookedDateTime(LocalDateTime.now());
-        ticket.setTravelDateTime(LocalDate.of(2021,9,1));
+        ticket.setTravelDate(LocalDate.of(2021,9,1));
         ticket.setAmount(950);
         ticket.setSource("BENGALURU");
         ticket.setDestination("CHENNAI");
-        ticket.setSeatNumbers(new int[]{12,13});
+        ticket.setSeatNumbers(List.of(12,13));
         ticket.setStatus(TicketStatus.CONIFRMED);
 
         List<Traveller> travellers=List.of(

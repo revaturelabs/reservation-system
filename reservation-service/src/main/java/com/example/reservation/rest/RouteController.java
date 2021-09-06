@@ -2,9 +2,10 @@ package com.example.reservation.rest;
 
 import com.example.reservation.model.Route;
 import com.example.reservation.model.Trip;
-import com.example.reservation.payloads.RoutePayload;
+import com.example.reservation.payloads.RouteResponsePayload;
 import com.example.reservation.payloads.TripRequestPayload;
 import com.example.reservation.service.RouteService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Tag(name = "routes", description ="REST API for route resource")
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/routes")
@@ -33,7 +35,7 @@ public class RouteController {
     ){
         LocalDate localDate=LocalDate.parse(travelDate,formatter);
         System.out.println(localDate);
-        RoutePayload route=routeService.getRoute(localDate,source,destination);
+        RouteResponsePayload route=routeService.getRoute(localDate,source,destination);
         return  ResponseEntity.status(HttpStatus.OK).body(route);
     }
 

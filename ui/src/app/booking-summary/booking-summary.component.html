@@ -11,6 +11,7 @@
   <ng-container *ngIf="booking.seats">
     Seat Numbers : {{ booking.seats.join() }}
     <br />
+    <a href="#" (click)="handleChangeSeats($event)">change-seats</a>
   </ng-container>
 </mat-card>
 <br />

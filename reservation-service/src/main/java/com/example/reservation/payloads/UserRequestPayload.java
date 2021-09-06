@@ -11,7 +11,7 @@ import com.example.reservation.model.Traveller;
 import lombok.Data;
 
 @Data
-public class UserPayload {
+public class UserRequestPayload {
 
 	private String email;
     private String password;
@@ -21,7 +21,6 @@ public class UserPayload {
     private Gender gender;
     private String avatar;
     private Address address;
-    private IdProof idProof;
-    private List<Traveller> travellers;
+
 	
 }

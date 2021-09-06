@@ -5,8 +5,8 @@ import com.example.reservation.model.*;
 import com.example.reservation.repository.BusRepository;
 import com.example.reservation.repository.ReservedSeatsRepository;
 import com.example.reservation.repository.RouteRepository;
-import com.example.reservation.payloads.BusPayload;
-import com.example.reservation.payloads.RoutePayload;
+import com.example.reservation.payloads.BusRequestPayload;
+import com.example.reservation.payloads.RouteResponsePayload;
 import com.example.reservation.payloads.TripRequestPayload;
 import com.example.reservation.payloads.TripResponsePayload;
 import org.modelmapper.ModelMapper;
@@ -70,11 +70,11 @@ public class RouteServiceImpl implements RouteService{
     }
 
     @Override
-    public RoutePayload getRoute(LocalDate travelDate, String source, String destination) {
+    public RouteResponsePayload getRoute(LocalDate travelDate, String source, String destination) {
 
         Route dbRoute= routeRepository.find(source,destination,travelDate);
 
-        RoutePayload routePayload=new RoutePayload();
+        RouteResponsePayload routePayload=new RouteResponsePayload();
         routePayload.setId(dbRoute.getId());
         routePayload.setSource(dbRoute.getSource());
         routePayload.setDestination(dbRoute.getDestination());
@@ -108,7 +108,7 @@ public class RouteServiceImpl implements RouteService{
             tripPayload.setArrivalDateTime(trip.getArrivalTime());
             tripPayload.setPrice(tripPrice);
 
-            BusPayload busPayload=new BusPayload();
+            BusRequestPayload busPayload=new BusRequestPayload();
             busPayload.setNumber(trip.getBus().getNumber());
             busPayload.setName(trip.getBus().getName());
             busPayload.setType(trip.getBus().getType());
@@ -118,9 +118,7 @@ public class RouteServiceImpl implements RouteService{
             tripPayload.setBus(busPayload);
 
             ReservedSeats reservedSeats=reservedSeatsRepository.findReservedSeats(travelDate.plusDays(1),trip.getBus().getNumber());
-            if(reservedSeats==null){
-             tripPayload.setReservedSeats(new int[]{});
-            }else {
+            if(reservedSeats!=null){
                 tripPayload.setReservedSeats(reservedSeats.getReservedSeats());
             }
             tripPayloads.add(tripPayload);

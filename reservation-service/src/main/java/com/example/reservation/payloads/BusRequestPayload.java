@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
-public class BusPayload {
+public class BusRequestPayload {
 
     private String number;
     private String name;

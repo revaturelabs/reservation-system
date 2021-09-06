@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { BookingService } from '../booking.service'
-import { RouteService } from '../route.service'
+// import { RouteService } from '../route.service'
 
 @Component({
   selector: 'app-booking-summary',
@@ -16,5 +16,10 @@ export class BookingSummaryComponent implements OnInit {
     this.bookingService.bookingStream.subscribe((booking) => {
       this.booking = booking
     })
+  }
+
+  handleChangeSeats(event: any): void {
+    event.preventDefault()
+    this.bookingService.changeSeats()
   }
 }
