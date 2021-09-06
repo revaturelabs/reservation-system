@@ -18,7 +18,7 @@ export class RouteTripsComponent implements OnInit {
       if (booking.changeSeats) {
         this.openSeatsLayout(
           booking.trip.id,
-          this.bookingService.getReservedSeats(),
+          this.bookingService.getReservedSeats() || [],
         )
       }
 
@@ -36,7 +36,9 @@ export class RouteTripsComponent implements OnInit {
               arrTime: arr.hours() + ':' + arr.minutes(),
               travelDuration: duration,
               name: trip.bus.name,
-              seats: 40 - trip.reservedSeats.length,
+              seats: trip.reservedSeats
+                ? 40 - trip.reservedSeats.length - 1
+                : 40,
               price: trip.price,
               reservedSeats: trip.reservedSeats,
             }
@@ -46,7 +48,7 @@ export class RouteTripsComponent implements OnInit {
   }
 
   viewSeats(tripId: string, reservedSeats: any) {
-    this.openSeatsLayout(tripId, reservedSeats)
+    this.openSeatsLayout(tripId, reservedSeats || [])
   }
 
   openSeatsLayout(tripId: string, reservedSeats: any) {

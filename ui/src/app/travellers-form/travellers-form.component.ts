@@ -29,17 +29,20 @@ export class TravellersFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let travellers = this.bookingService.booking.seats || []
-    for (let seat of travellers) {
-      const traveller: FormGroup = this.fb.group({
-        name: [''],
-        age: [0],
-        gender: [''],
-        idProof: [''],
-        idNumber: [''],
-        disablity: ['false'],
-      })
-      this.travellers.push(traveller)
-    }
+    this.bookingService.bookingStream.subscribe((booking) => {
+      let travellers = booking.seats || []
+      this.travellers.clear()
+      for (let seat of travellers) {
+        const traveller: FormGroup = this.fb.group({
+          name: [''],
+          age: [0],
+          gender: [''],
+          idProof: [''],
+          idNumber: [''],
+          disablity: ['false'],
+        })
+        this.travellers.push(traveller)
+      }
+    })
   }
 }
