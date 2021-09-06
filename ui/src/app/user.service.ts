@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core'
 import { tap } from 'rxjs/operators'
 import { BehaviorSubject } from 'rxjs'
 
+import jwt_decode from 'jwt-decode'
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,9 +18,25 @@ export class UserService {
     return this.httpClient.post(api, userPayload)
   }
 
+  getToken() {
+    if (localStorage.getItem('auth-token')) {
+      return localStorage.getItem('auth-token')
+    } else {
+      return null
+    }
+  }
+
   isLoggedIn() {
-    if (localStorage.getItem('auth-token')) return true
+    if (this.getToken()) return true
     else return false
+  }
+
+  getCurrentUser() {
+    if (this.isLoggedIn()) {
+      let decoded: any = jwt_decode(this.getToken() || '')
+      return decoded.sub
+    }
+    return 'guest'
   }
 
   login(credentials: any) {
