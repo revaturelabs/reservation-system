@@ -1,0 +1,68 @@
+<div class="Bus_Form_Container">
+    <div class="Bus_Form_Header">
+        <p>Add Buses Here.</p>
+    </div>
+
+    <div class="Bus_Form_Section">
+        <form [formGroup]="BusFormGroup" (submit)="handleSubmit($event)" class="bus_form">
+            <div class="form-group">
+                <label>Bus Number:</label>
+                <input class="form-control" placeholder="Bus Number" formControlName="number" />
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label>Bus Name:</label>
+                <input class="form-control" placeholder="Bus Name" formControlName="name" />
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label>Bus Type:</label>
+                <select formControlName="seatType">
+                    <option value="AC">AC</option>
+                    <option value="NON_AC">NON-AC</option>
+                </select>
+            </div>
+            <br />
+
+
+            <div class="form-group">
+                <label>Total Seats:</label>
+                <input type="number" class="form-control" placeholder="Seats" formControlName="seats" />
+            </div>
+            <br />
+
+            <!-- <div class="form-group">
+                <label>Driver Name:</label>
+                <input type="text" class="form-control" placeholder="Name" formControlName="contacts" />
+                <label>Driver Number:</label>
+                <input type="number" class="form-control" placeholder="Number" formControlName="contacts" />
+            </div> -->
+
+            <!-- <ng-container formArrayName="contacts">
+                <ng-container *ngFor="let i of contacts.controls;let idx=index;">
+                    <div class="form-group">
+                        <label>contacts</label>
+                        <form [formGroup]="i">
+                            <div class="input-group mb-3">
+                                <input class="form-control" placeholder="DriverName" formControlName="contacts" /><br />
+                                <input class="form-control" placeholder="DriverNumber" formControlName="contacts" />
+                            </div>
+                        </form>
+                    </div>
+                </ng-container>
+            </ng-container> -->
+
+        </form>
+        <button class="Bus_Form_Submit_button" (click)="handleSubmit($event)">Submit</button>
+
+
+
+    </div>
+
+
+
+
+
+</div>
