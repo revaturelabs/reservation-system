@@ -1,8 +1,10 @@
 package com.example.reservation.rest;
 
 import com.example.reservation.model.Ticket;
+import com.example.reservation.payloads.TicketCancelPayload;
 import com.example.reservation.payloads.TicketPayload;
 import com.example.reservation.service.TicketService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,5 +36,16 @@ public class TicketController {
         return  ResponseEntity.status(HttpStatus.CREATED).body(tickets);
     }
 
+    @PutMapping("/{ticketId}")
+    public ResponseEntity<TicketCancelPayload> cancelTicket(@PathVariable ObjectId ticketId){
+       TicketCancelPayload refundAmt= ticketService.cancelTicket(ticketId);
+        return ResponseEntity.status(HttpStatus.OK).body(refundAmt);
+    }
+
+    @PutMapping("/{ticketId}/{seatNumber}")
+    public ResponseEntity<?> cancelTicketForAPassenger(@PathVariable ObjectId ticketId,@PathVariable int seatNumber){
+       TicketCancelPayload refundAmt= ticketService.cancelTicketForAPassenger(ticketId,seatNumber);
+        return ResponseEntity.status(HttpStatus.OK).body(refundAmt);
+    }
 
 }
