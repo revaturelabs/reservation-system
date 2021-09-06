@@ -1,14 +1,66 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { Router } from '@angular/router'
+import { BehaviorSubject } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookingService {
-  constructor(private httpClient: HttpClient) {}
+  api = 'http://localhost:8080/api/tickets'
+
+  booking: any = {}
+
+  bookingStream = new BehaviorSubject(this.booking)
+
+  setTripWithSeats(tripId: string, seats: Array<number>): void {
+    this.booking.tripId = tripId
+    this.booking.trip = this.booking.route.tripList.find(
+      (t: any) => t.id === tripId,
+    )
+    this.booking.seats = seats
+
+    this.bookingStream.next(this.booking)
+  }
+  setTravellers(travellers: Array<any>) {
+    let travellersReqPayload = []
+    for (let traveller of travellers) {
+      let t = {
+        name: traveller.name,
+        age: traveller.age,
+        gender: traveller.gender,
+        disablity: traveller.disablity,
+        idProof: {
+          type: traveller.idProof,
+          number: traveller.idNumber,
+        },
+      }
+      travellersReqPayload.push(t)
+    }
+
+    this.booking.travellers = travellersReqPayload
+    this.bookingStream.next(this.booking)
+  }
+
+  bookTicket() {
+    const ticketPayload = {
+      travelDate: this.booking.route.travelDate,
+      routeId: this.booking.route.id,
+      tripId: this.booking.tripId,
+      seatNumbers: this.booking.seats,
+      travellers: this.booking.travellers,
+    }
+    const api = 'http://localhost:8080/api/tickets'
+    this.httpClient.post(api, ticketPayload).subscribe((response) => {
+      this.booking = {}
+      this.bookingStream.next({})
+      this.router.navigate(['/booking-history'])
+    })
+  }
 
   getBookingHistory() {
-    let api = 'http://localhost:8080/api/tickets'
-    return this.httpClient.get(api)
+    return this.httpClient.get(this.api)
   }
+
+  constructor(private httpClient: HttpClient, private router: Router) {}
 }

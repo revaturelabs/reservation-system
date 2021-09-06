@@ -3,25 +3,17 @@ package com.example.reservation.service;
 import com.example.reservation.email.MailService;
 import com.example.reservation.model.*;
 import com.example.reservation.repository.*;
-import com.example.reservation.rest.payloads.TicketPayload;
-import com.example.reservation.rest.payloads.TravellerPayload;
-import org.bson.types.ObjectId;
+import com.example.reservation.payloads.TicketPayload;
+import com.example.reservation.payloads.TravellerPayload;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -139,7 +131,7 @@ public class TicketServiceImpl implements TicketService {
         Ticket savedTicket=ticketRepository.save(ticket);
 
         // send an email
-        mailService.sendEmail(userEmail,"Ticket booking confirmed",ticketPayload.getTripId());
+        //mailService.sendEmail(userEmail,"Ticket booking confirmed",ticketPayload.getTripId());
 
         return modelMapper.map(savedTicket,TicketPayload.class);
 

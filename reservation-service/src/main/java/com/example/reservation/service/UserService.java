@@ -2,7 +2,7 @@ package com.example.reservation.service;
 
 
 import com.example.reservation.model.User;
-import com.example.reservation.rest.payloads.UserPayload;
+import com.example.reservation.payloads.UserPayload;
 
 import java.util.List;
 

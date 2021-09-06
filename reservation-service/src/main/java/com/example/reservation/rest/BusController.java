@@ -2,7 +2,7 @@ package com.example.reservation.rest;
 
 import com.example.reservation.exception.ResourceConflictExeception;
 import com.example.reservation.model.Bus;
-import com.example.reservation.rest.payloads.ResponseErrorPayload;
+import com.example.reservation.payloads.ResponseErrorPayload;
 import com.example.reservation.service.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

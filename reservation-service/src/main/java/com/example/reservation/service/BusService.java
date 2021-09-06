@@ -15,8 +15,4 @@ public interface BusService {
 //    List<Bus> getByRoute(String routeId);
 //    Bus getByTrip(String tripCode);
 
-
-
-
-
 }

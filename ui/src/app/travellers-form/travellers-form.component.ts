@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
+import { BookingService } from '../booking.service'
 import { RouteService } from '../route.service'
 
 @Component({
@@ -19,28 +20,26 @@ export class TravellersFormComponent implements OnInit {
   }
 
   handleSubmit(event: Event): void {
-    this.routeService.setTravellers(this.travellersFormGroup.value.travellers)
+    this.bookingService.setTravellers(this.travellersFormGroup.value.travellers)
   }
 
-  constructor(private fb: FormBuilder, private routeService: RouteService) {}
+  constructor(
+    private fb: FormBuilder,
+    private bookingService: BookingService,
+  ) {}
 
   ngOnInit() {
-    this.routeService.seatsStream.subscribe((data: any) => {
-      if (data.selectedSeats) {
-        this.selectedSeats = data.selectedSeats
-        this.travellers.clear()
-        for (let seat of data.selectedSeats) {
-          const traveller: FormGroup = this.fb.group({
-            name: [''],
-            age: [0],
-            gender: [''],
-            idProof: [''],
-            idNumber: [''],
-            disablity: ['false'],
-          })
-          this.travellers.push(traveller)
-        }
-      }
-    })
+    let travellers = this.bookingService.booking.seats || []
+    for (let seat of travellers) {
+      const traveller: FormGroup = this.fb.group({
+        name: [''],
+        age: [0],
+        gender: [''],
+        idProof: [''],
+        idNumber: [''],
+        disablity: ['false'],
+      })
+      this.travellers.push(traveller)
+    }
   }
 }

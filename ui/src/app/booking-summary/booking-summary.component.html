@@ -1,0 +1,27 @@
+<mat-card>
+  <ng-container *ngIf="booking.route">
+    Source : {{ booking.route.source }}, Destination :
+    {{ booking.route.destination }}
+    <br />
+  </ng-container>
+  <ng-container *ngIf="booking.trip">
+    Trip ID : {{ booking.trip.id }}
+    <br />
+  </ng-container>
+  <ng-container *ngIf="booking.seats">
+    Seat Numbers : {{ booking.seats.join() }}
+    <br />
+  </ng-container>
+</mat-card>
+<br />
+<mat-card *ngIf="booking.travellers">
+  <ng-container>
+    <mat-list>
+      <mat-list-item *ngFor="let traveller of booking.travellers">
+        {{ traveller.name }}, {{ traveller.age }}, {{ traveller.gender }} ,
+        {{ traveller.idProof.type }} : {{ traveller.idProof.number }},
+        {{ traveller.disablity }}
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+</mat-card>

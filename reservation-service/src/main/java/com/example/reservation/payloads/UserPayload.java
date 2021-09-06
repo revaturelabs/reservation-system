@@ -1,4 +1,4 @@
-package com.example.reservation.rest.payloads;
+package com.example.reservation.payloads;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -2,13 +2,12 @@ package com.example.reservation.rest;
 
 import com.example.reservation.model.Route;
 import com.example.reservation.model.Trip;
-import com.example.reservation.rest.payloads.RoutePayload;
+import com.example.reservation.payloads.RoutePayload;
+import com.example.reservation.payloads.TripRequestPayload;
 import com.example.reservation.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -39,7 +38,6 @@ public class RouteController {
     }
 
 
-
     @PostMapping
     public ResponseEntity<?> addNewRoute(@RequestBody Route route){
        Route savedRoute= routeService.addNewRoute(route);
@@ -47,7 +45,7 @@ public class RouteController {
     }
 
     @PutMapping("/{routeId}/trip")
-    public ResponseEntity<?> addNewTripToRoute(@PathVariable("routeId") String routeId, @RequestBody Trip trip){
+    public ResponseEntity<?> addNewTripToRoute(@PathVariable("routeId") String routeId, @RequestBody TripRequestPayload trip){
         Trip savedTrip=routeService.addNewTrip(routeId,trip);
         return ResponseEntity.status(HttpStatus.OK).body(trip);
     }

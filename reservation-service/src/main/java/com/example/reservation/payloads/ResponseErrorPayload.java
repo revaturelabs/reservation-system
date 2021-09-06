@@ -1,4 +1,4 @@
-package com.example.reservation.rest.payloads;
+package com.example.reservation.payloads;
 
 import lombok.Data;
 

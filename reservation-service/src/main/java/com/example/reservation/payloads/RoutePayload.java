@@ -1,8 +1,6 @@
-package com.example.reservation.rest.payloads;
+package com.example.reservation.payloads;
 
-import com.example.reservation.model.Trip;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -18,6 +16,6 @@ public class RoutePayload {
     private String source;
     private String destination;
     private int distance;
-    private List<TripPayload> tripList=new ArrayList<>();
+    private List<TripResponsePayload> tripList=new ArrayList<>();
 
 }

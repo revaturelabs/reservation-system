@@ -21,8 +21,10 @@ import { TravellersFormComponent } from './travellers-form/travellers-form.compo
 import { TokenInterceptorService } from './token-interceptor.service'
 import { BookingHistoryComponent } from './booking-history/booking-history.component'
 import { NavbarComponent } from './navbar/navbar.component'
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard'
 import { MessageComponent } from './message/message.component'
+import { BookingSummaryComponent } from './booking-summary/booking-summary.component'
+import { BookingFinalComponent } from './booking-final/booking-final.component'
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'booking' },
@@ -39,15 +41,21 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
+
+    BookingComponent,
     SearchFormComponent,
     RouteTripsComponent,
     SeatsLayoutComponent,
     TravellersFormComponent,
-    BookingComponent,
+    BookingSummaryComponent,
+    BookingFinalComponent,
+
     LoginFormComponent,
     RegisterFormComponent,
+
     BookingHistoryComponent,
-    NavbarComponent,
+
     MessageComponent,
   ],
   imports: [

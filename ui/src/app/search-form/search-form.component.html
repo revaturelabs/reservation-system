@@ -48,9 +48,15 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Travel date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="travelDate" />
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="travelDate"
+        [min]="minDate"
+        [max]="maxDate"
+      />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
     </mat-form-field>
     &nbsp;&nbsp;
     <button mat-raised-button color="primary">Search</button>

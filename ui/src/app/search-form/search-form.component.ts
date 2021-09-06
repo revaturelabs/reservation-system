@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { MatDialog } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
 import { map, startWith } from 'rxjs/operators'
+import { MessageComponent } from '../message/message.component'
 import { RouteService } from '../route.service'
 
 @Component({
@@ -11,15 +13,23 @@ import { RouteService } from '../route.service'
 })
 export class SearchFormComponent implements OnInit {
   searchFormGroup!: FormGroup
-
+  minDate!: Date
+  maxDate!: Date
   options: string[] = ['chennai', 'bengaluru']
   filteredOptions!: Observable<string[]>
 
   ngOnInit() {
+    const today = new Date()
+    const currentYear = today.getFullYear()
+    const month = today.getMonth()
+    const day = today.getDate()
+    this.minDate = new Date(currentYear, month, day)
+    this.maxDate = new Date(currentYear, month, day + 15)
+
     this.searchFormGroup = this.fb.group({
       source: ['chennai', [Validators.required]],
       destination: ['bengaluru', [Validators.required]],
-      travelDate: [new Date(2021, 9, 5), [Validators.required]],
+      travelDate: [new Date(), [Validators.required]],
     })
     this.filteredOptions = this.searchFormGroup.controls[
       'source'
@@ -38,6 +48,14 @@ export class SearchFormComponent implements OnInit {
   handleSearch(event: Event): void {
     event.preventDefault()
     const { source, destination, travelDate } = this.searchFormGroup.value
+    if (source === destination) {
+      this.dialog.open(MessageComponent, {
+        data: {
+          message: 'source & destination cannot be same',
+        },
+      })
+      return
+    }
     this.routeService.getRoute(source, destination, travelDate)
   }
 
@@ -49,5 +67,9 @@ export class SearchFormComponent implements OnInit {
     )
   }
 
-  constructor(private fb: FormBuilder, private routeService: RouteService) {}
+  constructor(
+    private fb: FormBuilder,
+    private routeService: RouteService,
+    public dialog: MatDialog,
+  ) {}
 }

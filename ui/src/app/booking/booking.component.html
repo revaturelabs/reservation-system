@@ -1,5 +1,12 @@
 <app-search-form></app-search-form>
 <br />
-<app-route-trips></app-route-trips>
+<app-booking-summary *ngIf="booking.route"></app-booking-summary>
 <br />
-<app-travellers-form></app-travellers-form>
+<app-route-trips *ngIf="booking.route && !booking.trip"></app-route-trips>
+<br />
+
+<app-travellers-form
+  *ngIf="booking.seats && !booking.travellers"
+></app-travellers-form>
+
+<app-booking-final *ngIf="booking.travellers"></app-booking-final>

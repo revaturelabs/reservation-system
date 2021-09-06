@@ -1,54 +1,53 @@
-<mat-card *ngIf="selectedSeats.length > 0">
-  <div class="row">
-    <div class="col-10">
-      <form [formGroup]="travellersFormGroup" (submit)="handleSubmit($event)">
-        <ng-container formArrayName="travellers">
-          <ng-container
-            *ngFor="let traveller of travellers.controls; let idx = index"
-          >
-            <div class="form-group">
-              <form [formGroup]="traveller">
-                <div class="input-group mb-3">
-                  <input
-                    class="form-control"
-                    placeholder="Name"
-                    formControlName="name"
-                  />
-                  <input
-                    class="form-control"
-                    placeholder="Age"
-                    formControlName="age"
-                    size="3"
-                  />
-                  <select class="form-control" formControlName="gender">
-                    <option value="MALE">Male</option>
-                    <option value="FEMALE">Female</option>
-                  </select>
-                  <select class="form-control" formControlName="idProof">
-                    <option value="adhar">Adhar</option>
-                    <option value="dl">Driving License</option>
-                    <option value="pan">PAN</option>
-                    <option value="voter">Voter ID</option>
-                    <option value="passport">Passport</option>
-                  </select>
-                  <input
-                    class="form-control"
-                    placeholder="ID number"
-                    formControlName="idNumber"
-                  />
-                  <select class="form-control" formControlName="disablity">
-                    <option value="false">False</option>
-                    <option value="true">True</option>
-                  </select>
-                </div>
-              </form>
+<mat-card *ngIf="travellers.length > 0">
+  <form [formGroup]="travellersFormGroup" (submit)="handleSubmit($event)">
+    <ng-container formArrayName="travellers">
+      <ng-container
+        *ngFor="let traveller of travellers.controls; let idx = index"
+      >
+        <mat-card>
+          <mat-chip color="primary" selected>{{ idx + 1 }}</mat-chip>
+          <form [formGroup]="traveller">
+            <div class="row">
+              <mat-form-field class="col-2">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" formControlName="name" />
+              </mat-form-field>
+              <mat-form-field class="col-2">
+                <mat-label>Age</mat-label>
+                <input matInput type="text" formControlName="age" />
+              </mat-form-field>
+              <mat-form-field class="col-2">
+                <mat-label>Gender</mat-label>
+                <select matNativeControl required formControlName="gender">
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
+                </select>
+              </mat-form-field>
+              <mat-form-field class="col-2">
+                <mat-label>ID Proof</mat-label>
+                <select matNativeControl required formControlName="idProof">
+                  <option value="ADHAR">Adhar</option>
+                  <option value="VOTER_ID">Voter ID</option>
+                </select>
+              </mat-form-field>
+              <mat-form-field class="col-2">
+                <mat-label>ID Proof Number</mat-label>
+                <input matInput type="text" formControlName="idNumber" />
+              </mat-form-field>
+              <mat-form-field class="col-2">
+                <mat-label>Disablity</mat-label>
+                <select matNativeControl required formControlName="disablity">
+                  <option value="MALE">No</option>
+                  <option value="FEMALE">Yes</option>
+                </select>
+              </mat-form-field>
             </div>
-          </ng-container>
-        </ng-container>
+          </form>
+        </mat-card>
         <br />
-
-        <button mat-raised-button color="primary">Pay & Book Ticket</button>
-      </form>
-    </div>
-  </div>
+      </ng-container>
+    </ng-container>
+    <br />
+    <button mat-raised-button color="primary">Next : Ticket Summary</button>
+  </form>
 </mat-card>

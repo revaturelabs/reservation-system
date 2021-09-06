@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.reservation.exception.ResourceConflictExeception;
 import com.example.reservation.model.User;
 import com.example.reservation.repository.UserRepository;
-import com.example.reservation.rest.payloads.UserPayload;
+import com.example.reservation.payloads.UserPayload;
 
 @Service
 public class UserServiceImpl implements UserService {

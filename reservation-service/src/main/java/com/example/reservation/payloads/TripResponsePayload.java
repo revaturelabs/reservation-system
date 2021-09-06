@@ -1,15 +1,13 @@
-package com.example.reservation.rest.payloads;
+package com.example.reservation.payloads;
 
-import com.example.reservation.model.Bus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 
 @Data
-public class TripPayload {
+public class TripResponsePayload {
 
     private String id;
     @JsonFormat(pattern = "HH:mm")

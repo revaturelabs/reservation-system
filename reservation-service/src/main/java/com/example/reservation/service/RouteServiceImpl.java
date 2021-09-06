@@ -5,13 +5,12 @@ import com.example.reservation.model.*;
 import com.example.reservation.repository.BusRepository;
 import com.example.reservation.repository.ReservedSeatsRepository;
 import com.example.reservation.repository.RouteRepository;
-import com.example.reservation.rest.payloads.BusPayload;
-import com.example.reservation.rest.payloads.RoutePayload;
-import com.example.reservation.rest.payloads.TripPayload;
+import com.example.reservation.payloads.BusPayload;
+import com.example.reservation.payloads.RoutePayload;
+import com.example.reservation.payloads.TripRequestPayload;
+import com.example.reservation.payloads.TripResponsePayload;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -30,8 +29,8 @@ public class RouteServiceImpl implements RouteService{
     @Autowired
     private ReservedSeatsRepository reservedSeatsRepository;
 
-//    @Autowired
-//    private MongoTemplate mongoTemplate;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
     public Route addNewRoute(Route route) {
@@ -39,9 +38,10 @@ public class RouteServiceImpl implements RouteService{
     }
 
     @Override
-    public Trip addNewTrip(String routeId, Trip trip) {
+    public Trip addNewTrip(String routeId, TripRequestPayload tripRequestPayload) {
         Optional<Route> optionalRoute =routeRepository.findById(routeId);
         Route route=optionalRoute.orElseThrow(()->new ResourceNotFoundException(routeId));
+        Trip trip=modelMapper.map(tripRequestPayload,Trip.class);
         route.getTripList().add(trip);
         Route updatedRoute= routeRepository.save(route);
         return  trip;
@@ -83,7 +83,7 @@ public class RouteServiceImpl implements RouteService{
 
         List<Trip> trips=dbRoute.getTripList();
 
-        List<TripPayload> tripPayloads=new ArrayList<>();
+        List<TripResponsePayload> tripPayloads=new ArrayList<>();
         for(Trip trip:trips){
 
             Bus bus=trip.getBus();
@@ -102,7 +102,7 @@ public class RouteServiceImpl implements RouteService{
                 tripPrice+=300;
             }
 
-            TripPayload tripPayload=new TripPayload();
+            TripResponsePayload tripPayload=new TripResponsePayload();
             tripPayload.setId(trip.getId());
             tripPayload.setDepTime(trip.getDepTime());
             tripPayload.setArrivalDateTime(trip.getArrivalTime());

@@ -3,11 +3,11 @@ import { BookingService } from '../booking.service'
 import { RouteService } from '../route.service'
 
 @Component({
-  selector: 'app-booking',
-  templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss'],
+  selector: 'app-booking-summary',
+  templateUrl: './booking-summary.component.html',
+  styleUrls: ['./booking-summary.component.scss'],
 })
-export class BookingComponent implements OnInit {
+export class BookingSummaryComponent implements OnInit {
   booking!: any
 
   constructor(private bookingService: BookingService) {}

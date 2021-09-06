@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.reservation.exception.ResourceConflictExeception;
 import com.example.reservation.model.User;
-import com.example.reservation.rest.payloads.ResponseErrorPayload;
-import com.example.reservation.rest.payloads.UserPayload;
+import com.example.reservation.payloads.ResponseErrorPayload;
+import com.example.reservation.payloads.UserPayload;
 import com.example.reservation.service.UserService;
 
 @CrossOrigin("*")

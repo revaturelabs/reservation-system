@@ -1,7 +1,7 @@
 package com.example.reservation.rest;
 
 import com.example.reservation.model.Ticket;
-import com.example.reservation.rest.payloads.TicketPayload;
+import com.example.reservation.payloads.TicketPayload;
 import com.example.reservation.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

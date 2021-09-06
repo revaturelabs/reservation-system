@@ -3,6 +3,7 @@ import { RouteService } from '../route.service'
 import * as moment from 'moment'
 import { MatDialog } from '@angular/material/dialog'
 import { SeatsLayoutComponent } from '../seats-layout/seats-layout.component'
+import { BookingService } from '../booking.service'
 
 @Component({
   selector: 'app-route-trips',
@@ -10,18 +11,17 @@ import { SeatsLayoutComponent } from '../seats-layout/seats-layout.component'
   styleUrls: ['./route-trips.component.scss'],
 })
 export class RouteTripsComponent implements OnInit {
-  route = null
+  route!: any
   trips: Array<any> = []
   ngOnInit(): void {
-    this.routeService.routeStream.subscribe((route: any) => {
+    this.bookingService.bookingStream.subscribe((booking: any) => {
       this.trips = []
-      this.route = route
-      if (route.tripList)
-        for (let trip of route.tripList) {
+      this.route = booking.route
+      if (this.route.tripList)
+        for (let trip of this.route.tripList) {
           var dep = moment(trip.depTime, 'HH:mm')
           var arr = moment(trip.arrivalDateTime, 'dd/MM/yyyy HH:mm')
           var duration = moment.duration(arr.diff(dep))
-          console.log(duration)
           const tripRow = {
             id: trip.id,
             depTime: dep.hours() + ':' + dep.minutes(),
@@ -32,29 +32,33 @@ export class RouteTripsComponent implements OnInit {
             price: trip.price,
             reservedSeats: trip.reservedSeats,
           }
-
-          console.log(tripRow)
-
           this.trips.push(tripRow)
         }
     })
   }
 
   viewSeats(tripId: string, reservedSeats: any) {
+    console.log(tripId)
+    console.log(reservedSeats)
+
     const dialogRef = this.dialog.open(SeatsLayoutComponent, {
-      width: '70%',
+      width: '60%',
       height: '80%',
       data: {
         reservedSeats: reservedSeats,
-        selectedSeats: this.routeService.selectedSeats,
+        selectedSeats: this.bookingService.booking.seats || [],
       },
     })
     dialogRef.afterClosed().subscribe((seats) => {
       if (seats) {
-        this.routeService.setTripWithSeats(tripId, seats)
+        this.bookingService.setTripWithSeats(tripId, seats)
       }
     })
   }
 
-  constructor(public routeService: RouteService, public dialog: MatDialog) {}
+  constructor(
+    public routeService: RouteService,
+    public bookingService: BookingService,
+    public dialog: MatDialog,
+  ) {}
 }

@@ -1,3 +1,22 @@
+
+server:
+  port: 8080
+
+STRIPE_SECRET_KEY: sk_test_51JUP34SH554kPulbBG6RNDJmk9phIUAdKZ1ENhJ3v1kjh0IYF165TVzUjMrbLw8nzDxBEawQX2E9kMw01LIpbmKY00NIW19Zey
+STRIPE_PUBLIC_KEY: pk_test_51JUP34SH554kPulbT8WLN5oatFKrJP9ELWwY9mL1e7EzbcbQj2VqyhJn5JjeNXFAg9yx7oQAMgXk29U3ppZ5HaU400mqFmXvXJ
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/reservation-system
+
+
+
+
+
+
+
+
 api:
   common:
     version: 1.0.0
@@ -19,14 +38,3 @@ springdoc:
   api-docs.path: /openapi/v3/api-docs
   packagesToScan: com.example.reservation
   pathsToMatch: /**
-
-server:
-  port: 8080
-
-STRIPE_SECRET_KEY: sk_test_51JUP34SH554kPulbBG6RNDJmk9phIUAdKZ1ENhJ3v1kjh0IYF165TVzUjMrbLw8nzDxBEawQX2E9kMw01LIpbmKY00NIW19Zey
-STRIPE_PUBLIC_KEY: pk_test_51JUP34SH554kPulbT8WLN5oatFKrJP9ELWwY9mL1e7EzbcbQj2VqyhJn5JjeNXFAg9yx7oQAMgXk29U3ppZ5HaU400mqFmXvXJ
-
-spring:
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/reservation-system

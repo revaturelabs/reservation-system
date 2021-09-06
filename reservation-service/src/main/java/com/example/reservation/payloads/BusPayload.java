@@ -1,11 +1,10 @@
-package com.example.reservation.rest.payloads;
+package com.example.reservation.payloads;
 
 import com.example.reservation.model.BusContact;
 import com.example.reservation.model.BusType;
 import com.example.reservation.model.SeatType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 @Data
 public class BusPayload {

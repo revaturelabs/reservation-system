@@ -31,7 +31,11 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     if (this.userService.isLoggedIn()) return true
     else {
-      this.dialog.open(MessageComponent, {})
+      this.dialog.open(MessageComponent, {
+        data: {
+          message: ' You must login, to activate this route',
+        },
+      })
       this.router.navigate(['/login'])
       return false
     }
