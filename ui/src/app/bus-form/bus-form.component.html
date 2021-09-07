@@ -19,9 +19,18 @@
 
             <div class="form-group">
                 <label>Bus Type:</label>
-                <select formControlName="seatType">
+                <select formControlName="type">
                     <option value="AC">AC</option>
                     <option value="NON_AC">NON-AC</option>
+                </select>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label>Seat Type:</label>
+                <select formControlName="seatType">
+                    <option value="SLEEPER">SLEEPER</option>
+                    <option value="CHAIR">CHAIR</option>
                 </select>
             </div>
             <br />
@@ -34,13 +43,15 @@
             <br />
 
             <!-- <div class="form-group">
+                <form formArrayName="contacts">
                 <label>Driver Name:</label>
                 <input type="text" class="form-control" placeholder="Name" formControlName="contacts" />
                 <label>Driver Number:</label>
                 <input type="number" class="form-control" placeholder="Number" formControlName="contacts" />
+                </form>
             </div> -->
 
-            <!-- <ng-container formArrayName="contacts">
+            <ng-container formArrayName="contacts">
                 <ng-container *ngFor="let i of contacts.controls;let idx=index;">
                     <div class="form-group">
                         <label>contacts</label>
@@ -52,7 +63,7 @@
                         </form>
                     </div>
                 </ng-container>
-            </ng-container> -->
+            </ng-container>
 
         </form>
         <button class="Bus_Form_Submit_button" (click)="handleSubmit($event)">Submit</button>

@@ -6,15 +6,19 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class BusService {
+  bus: any = {}
+  
+  constructor(private httpClient: HttpClient) {}
 
-  addBuses(buses:Array<any>){
+
+  addBuses(data:Array<any>){
+    console.log(data)
+ 
   let  api = 'http://localhost:8080/api/bus  '
-    console.log(buses)
-    return this.httpClient.post(api,buses)
+    return this.httpClient.post(api,data)
 
   }
 
 
-   constructor(private httpClient: HttpClient, private router: Router) {}
 
 }

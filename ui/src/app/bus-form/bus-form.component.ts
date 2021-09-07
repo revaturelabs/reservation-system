@@ -11,7 +11,8 @@ export class BusFormComponent implements OnInit {
 
 buses: any 
  
-  constructor(private fb: FormBuilder,private busService: BusService) { }
+  constructor(private fb: FormBuilder,
+            private busService: BusService) { }
 
   // BusFormGroup: FormGroup = this.fb.group({
   //    buses: this.fb.array([]),
@@ -33,6 +34,7 @@ buses: any
   BusFormGroup : FormGroup = this.fb.group({
     number: ['',[Validators.required]],
     name: ['',[Validators.required]],
+    type:[''],
     seatType: [''],
     seats:['42'],
     contacts: this.fb.array([])
@@ -44,7 +46,6 @@ buses: any
 
   
   handleSubmit(event: any){
-    // console.log(event)
     if(this.BusFormGroup.valid){
       let contactList = this.BusFormGroup.controls['contacts'].value.map( ( el:any )=>{
         return el.contacts; 
@@ -53,9 +54,10 @@ buses: any
       this.buses = {
         number: this.BusFormGroup.controls['number'].value,
         name: this.BusFormGroup.controls['name'].value,
+        type: this.BusFormGroup.controls['type'].value,
         seatType: this.BusFormGroup.controls['seatType'].value,
         seats: this.BusFormGroup.controls['seats'].value,
-        contacts: null
+        contacts: ['']
       }
     }
     console.log(this.buses);
