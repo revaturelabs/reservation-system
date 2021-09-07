@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-@Document
+@Document(collection = "tickets")
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
@@ -28,11 +28,11 @@ public class Ticket {
     @JsonSerialize(using= ToStringSerializer.class)
     private ObjectId id;
     private LocalDateTime bookedDateTime;
-    private LocalDate travelDateTime;
+    private LocalDate travelDate;
     private double amount;
     private String source;
     private String destination;
-    private int[] seatNumbers;
+    private List<Integer> seatNumbers;
     private TicketStatus status;
     private List<Traveller> travellers;
     @JsonIgnore

@@ -25,7 +25,11 @@ import { AuthGuard } from './auth.guard'
 import { MessageComponent } from './message/message.component'
 import { BookingSummaryComponent } from './booking-summary/booking-summary.component'
 import { BookingFinalComponent } from './booking-final/booking-final.component';
+<<<<<<< HEAD
 import { BusFormComponent } from './bus-form/bus-form.component'
+=======
+import { TicketViewComponent } from './ticket-view/ticket-view.component'
+>>>>>>> a6462d0ae19233da43b127437596f74011a53c5d
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'booking' },
@@ -61,7 +65,11 @@ const routes: Routes = [
     BookingHistoryComponent,
 
     MessageComponent,
+<<<<<<< HEAD
      BusFormComponent,
+=======
+     TicketViewComponent,
+>>>>>>> a6462d0ae19233da43b127437596f74011a53c5d
   ],
   imports: [
     BrowserModule,

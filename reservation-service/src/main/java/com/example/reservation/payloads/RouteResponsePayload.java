@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class RoutePayload {
+public class RouteResponsePayload {
 
     private String id;
     @JsonFormat(pattern = "dd/MM/yyyy")

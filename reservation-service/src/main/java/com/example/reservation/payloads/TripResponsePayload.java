@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 public class TripResponsePayload {
@@ -14,8 +15,8 @@ public class TripResponsePayload {
     private LocalTime depTime;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime arrivalDateTime;
-    private BusPayload bus;
-    private int[] reservedSeats;
+    private BusRequestPayload bus;
+    private List<Integer> reservedSeats;
     private double price;
 
 }

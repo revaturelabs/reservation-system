@@ -13,6 +13,7 @@ export class BookingComponent implements OnInit {
   constructor(private bookingService: BookingService) {}
 
   ngOnInit(): void {
+    this.bookingService.setNewBooking()
     this.bookingService.bookingStream.subscribe((booking) => {
       this.booking = booking
     })

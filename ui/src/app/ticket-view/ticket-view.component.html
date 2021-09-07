@@ -1,0 +1,51 @@
+<mat-card>
+  travel-date : {{ booking.ticketResponse.travelDate }}
+  <br />
+  source : {{ booking.ticketResponse.source }}
+  <br />
+  destination : {{ booking.ticketResponse.destination }}
+  <br />
+  trip : {{ booking.ticketResponse.trip.id }}
+  <br />
+  seats : {{ booking.ticketResponse.seatNumbers }}
+  <br />
+  status : {{ booking.ticketResponse.status }}
+  <br />
+  <br />
+
+  Travellers
+
+  <br />
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Seat</th>
+        <th>ID Proof</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let traveller of booking.ticketResponse.travellers">
+        <td>{{ traveller.name }}</td>
+        <td>{{ traveller.age }}</td>
+        <td>{{ traveller.gender }}</td>
+        <td>{{ traveller.seatNumber }}</td>
+        <td>{{ traveller.idProof.type }}</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-card>
+
+<br />
+
+<button mat-raised-button color="accent">Print</button>
+&nbsp;
+<button mat-raised-button color="warn">Download</button>
+&nbsp;
+
+<button (click)="navigateToBookingHistory()" mat-raised-button color="primary">
+  Booking History
+</button>

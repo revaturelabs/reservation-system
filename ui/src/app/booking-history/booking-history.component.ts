@@ -21,7 +21,6 @@ export class BookingHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.bookingService.getBookingHistory().subscribe((response: any) => {
       this.history = response
-      console.log(this.history)
     })
   }
 }

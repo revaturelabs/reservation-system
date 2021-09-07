@@ -15,32 +15,43 @@ export class RouteTripsComponent implements OnInit {
   trips: Array<any> = []
   ngOnInit(): void {
     this.bookingService.bookingStream.subscribe((booking: any) => {
+      if (booking.changeSeats) {
+        this.openSeatsLayout(
+          booking.trip.id,
+          this.bookingService.getReservedSeats() || [],
+        )
+      }
+
       this.trips = []
       this.route = booking.route
-      if (this.route.tripList)
-        for (let trip of this.route.tripList) {
-          var dep = moment(trip.depTime, 'HH:mm')
-          var arr = moment(trip.arrivalDateTime, 'dd/MM/yyyy HH:mm')
-          var duration = moment.duration(arr.diff(dep))
-          const tripRow = {
-            id: trip.id,
-            depTime: dep.hours() + ':' + dep.minutes(),
-            arrTime: arr.hours() + ':' + arr.minutes(),
-            travelDuration: duration,
-            name: trip.bus.name,
-            seats: 40 - trip.reservedSeats.length,
-            price: trip.price,
-            reservedSeats: trip.reservedSeats,
+      if (booking.route)
+        if (this.route.tripList)
+          for (let trip of this.route.tripList) {
+            var dep = moment(trip.depTime, 'HH:mm')
+            var arr = moment(trip.arrivalDateTime, 'dd/MM/yyyy HH:mm')
+            var duration = moment.duration(arr.diff(dep))
+            const tripRow = {
+              id: trip.id,
+              depTime: dep.hours() + ':' + dep.minutes(),
+              arrTime: arr.hours() + ':' + arr.minutes(),
+              travelDuration: duration,
+              name: trip.bus.name,
+              seats: trip.reservedSeats
+                ? 40 - trip.reservedSeats.length - 1
+                : 40,
+              price: trip.price,
+              reservedSeats: trip.reservedSeats,
+            }
+            this.trips.push(tripRow)
           }
-          this.trips.push(tripRow)
-        }
     })
   }
 
   viewSeats(tripId: string, reservedSeats: any) {
-    console.log(tripId)
-    console.log(reservedSeats)
+    this.openSeatsLayout(tripId, reservedSeats || [])
+  }
 
+  openSeatsLayout(tripId: string, reservedSeats: any) {
     const dialogRef = this.dialog.open(SeatsLayoutComponent, {
       width: '60%',
       height: '80%',

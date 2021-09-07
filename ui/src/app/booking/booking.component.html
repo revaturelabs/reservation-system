@@ -1,4 +1,4 @@
-<app-search-form></app-search-form>
+<app-search-form *ngIf="!booking.ticketResponse"></app-search-form>
 <br />
 <app-booking-summary *ngIf="booking.route"></app-booking-summary>
 <br />
@@ -10,3 +10,5 @@
 ></app-travellers-form>
 
 <app-booking-final *ngIf="booking.travellers"></app-booking-final>
+
+<app-ticket-view *ngIf="booking.ticketResponse"></app-ticket-view>

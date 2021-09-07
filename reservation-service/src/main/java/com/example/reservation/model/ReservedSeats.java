@@ -23,7 +23,7 @@ public class ReservedSeats {
     @Id
     ObjectId id;
     private LocalDate travelDate;
-    private int[] reservedSeats={};
+    private List<Integer> reservedSeats=new ArrayList<>();
     @DBRef
     private Bus bus;
 

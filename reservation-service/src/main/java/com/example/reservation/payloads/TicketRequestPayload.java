@@ -7,14 +7,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class TicketPayload {
+public class TicketRequestPayload {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     LocalDate travelDate;
     String routeId;
     String tripId;
-    int[] seatNumbers;
-    List<TravellerPayload> travellers;
+    List<Integer> seatNumbers;
+    List<TravellerRequestPayload> travellers;
+    String userEmail;
 
 
 

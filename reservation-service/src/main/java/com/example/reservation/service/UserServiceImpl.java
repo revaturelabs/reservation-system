@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.example.reservation.exception.ResourceConflictExeception;
 import com.example.reservation.model.User;
 import com.example.reservation.repository.UserRepository;
-import com.example.reservation.payloads.UserPayload;
+import com.example.reservation.payloads.UserRequestPayload;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -40,30 +40,30 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserPayload> getAll() {
+	public List<UserRequestPayload> getAll() {
 		List<User> users = userRepository.findAll();
-		List<UserPayload> usersPaylaods = new ArrayList<>();
+		List<UserRequestPayload> usersPaylaods = new ArrayList<>();
 		for(User user:users) {
-			UserPayload userPayload=modelMapper.map(user,UserPayload.class);
+			UserRequestPayload userPayload=modelMapper.map(user, UserRequestPayload.class);
 			usersPaylaods.add(userPayload);
 		}
 		return usersPaylaods;
 	}
 
 	@Override
-	public UserPayload getUserByEmail(String email) {
+	public UserRequestPayload getUserByEmail(String email) {
 		User user = userRepository.findByEmail(email);
-		UserPayload userPayload=modelMapper.map(user,UserPayload.class);
+		UserRequestPayload userPayload=modelMapper.map(user, UserRequestPayload.class);
 		return userPayload;
 
 	}
 
 	@Override
-	public List<UserPayload> getUserByMobile(String mobile) {
+	public List<UserRequestPayload> getUserByMobile(String mobile) {
 		List<User> users = userRepository.findByMobile(mobile);
-		List<UserPayload> usersPaylaods = new ArrayList<>();
+		List<UserRequestPayload> usersPaylaods = new ArrayList<>();
 		for(User user:users) {
-			UserPayload userPayload=modelMapper.map(user,UserPayload.class);
+			UserRequestPayload userPayload=modelMapper.map(user, UserRequestPayload.class);
 			usersPaylaods.add(userPayload);
 		}
 		return usersPaylaods;
