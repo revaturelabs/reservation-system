@@ -1,17 +1,23 @@
 package com.example.reservation.service;
 
 import com.example.reservation.email.MailService;
+import com.example.reservation.exception.ResourceNotFoundException;
 import com.example.reservation.model.*;
 import com.example.reservation.payloads.*;
 import com.example.reservation.repository.*;
+import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -148,4 +154,61 @@ public class TicketServiceImpl implements TicketService {
         String userEmail = context.getAuthentication().getName();
         return ticketRepository.findAll(userEmail);
     }
+
+
+    public TicketRefundPayload cancelTicketForAPassenger(ObjectId ticketId, int seatNumber) {
+        Ticket ticket=  ticketRepository.findById(ticketId).orElseThrow(()-> new ResourceNotFoundException("No Such Ticket available"));
+
+        List<Integer> seats=ticket.getSeatNumbers();
+        seats.remove(seatNumber);
+        for(Traveller traveller:ticket.getTravellers()){
+            if(traveller.getSeatNumber()==seatNumber){
+                ticket.getTravellers().remove(traveller);
+                break;
+            }
+        }
+        ticket.setStatus(TicketStatus.PARTIALlyCANCELED);
+
+        ReservedSeats reservedSeats=reservedSeatsRepository.findReservedSeats(ticket.getTravelDate(),ticket.getBus().getNumber());
+       List<Integer> resSeats= reservedSeats.getReservedSeats();
+       resSeats.remove(seatNumber);
+
+        double refundAmt=0.0;
+
+        //insitie the refund
+        if(ChronoUnit.DAYS.between(ticket.getTravelDate(), LocalDate.now())>=7)
+            refundAmt=ticket.getAmount()*0.85;
+        else if(ChronoUnit.DAYS.between(ticket.getTravelDate(),LocalDate.now())>=4){
+            refundAmt=ticket.getAmount()*0.50;
+        }else if(ChronoUnit.DAYS.between(ticket.getTravelDate(),LocalDate.now())>=1){
+            refundAmt=ticket.getAmount()*0.25;
+
+        }else if(ticket.getTravelDate()==LocalDate.now()){
+            Bus bus=ticket.getBus();
+            Trip ticketTrip= (Trip) bus.getRoute().getTripList().stream().filter(trip -> trip.getBus().equals(bus));
+            if((ticketTrip.getDepTime().getHour()- LocalDateTime.now().getHour())>=4){
+                refundAmt=ticket.getAmount()*0.10;
+            }else if((ticketTrip.getDepTime().getHour()- LocalDateTime.now().getHour())>=1){
+                refundAmt=ticket.getAmount()*0.05;
+            }else{
+                refundAmt=0.0;
+            }
+        }
+        reservedSeatsRepository.save(reservedSeats);
+        ticketRepository.save(ticket);
+        TicketRefundPayload ticketCancelPayload=new TicketRefundPayload(refundAmt);
+        return  ticketCancelPayload;
+    }
+
+    TicketRefundPayload cancelTicket(ObjectId ticketId){
+        Ticket ticket=  ticketRepository.findById(ticketId).orElseThrow(()-> new ResourceNotFoundException("No Such Ticket available"));
+        List<Integer> seats=ticket.getSeatNumbers();
+        ReservedSeats reservedSeats=reservedSeatsRepository.findReservedSeats(ticket.getTravelDate(),ticket.getBus().getNumber());
+        reservedSeats.getReservedSeats().addAll(seats);
+        ticket.setStatus(TicketStatus.CANCELED);
+        ticketRepository.save(ticket);
+        reservedSeatsRepository.save(reservedSeats);
+        return new TicketRefundPayload(0.0);
+    }
+
 }
