@@ -1,0 +1,54 @@
+<div class="Ticket_Report_Container">
+
+
+    
+    <!-- <mat-card fxLayout="row"  *ngFor="let ticket of TicketHistory">
+        <div>{{ ticket.ticketId}}</div>  
+        <div>{{ ticket.userName}}</div>  
+        <div>{{ ticket.totalAmount}}</div> 
+        <div>{{ ticket.ticketStatus}}</div> 
+    </mat-card> -->
+    
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Ticket ID Column -->
+        <ng-container matColumnDef="ticketId">
+          <th mat-header-cell *matHeaderCellDef> Ticket ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.ticketId}} </td>
+        </ng-container>
+      
+        <!-- User Name Column -->
+        <ng-container matColumnDef="userName">
+          <th mat-header-cell *matHeaderCellDef> User Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+        </ng-container>
+      
+        <!-- Trip ID Column -->
+        <ng-container matColumnDef="tripId">
+          <th mat-header-cell *matHeaderCellDef> Trip ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.tripId}} </td>
+        </ng-container>
+      
+        <!-- Total Amount Column -->
+        <ng-container matColumnDef="totalAmount">
+          <th mat-header-cell *matHeaderCellDef> Total Amount </th>
+          <td mat-cell *matCellDef="let element">{{element.totalAmount}}  </td>
+        </ng-container>
+        <!-- Ticket Status Column -->
+        <ng-container matColumnDef="ticketStatus">
+          <th mat-header-cell *matHeaderCellDef> Ticket Status </th>
+          <td mat-cell *matCellDef="let element"> <div [ngClass]="element.ticketStatus">{{element.ticketStatus}}</div> </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      
+      
+    
+
+</div>
+

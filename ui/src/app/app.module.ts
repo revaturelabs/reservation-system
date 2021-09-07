@@ -25,11 +25,15 @@ import { AuthGuard } from './auth.guard'
 import { MessageComponent } from './message/message.component'
 import { BookingSummaryComponent } from './booking-summary/booking-summary.component'
 import { BookingFinalComponent } from './booking-final/booking-final.component';
-<<<<<<< HEAD
+
 import { BusFormComponent } from './bus-form/bus-form.component'
-=======
+
 import { TicketViewComponent } from './ticket-view/ticket-view.component'
->>>>>>> a6462d0ae19233da43b127437596f74011a53c5d
+
+
+import { TicketViewComponent } from './ticket-view/ticket-view.component';
+import { TicketReportComponent } from './ticket-report/ticket-report.component'
+
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'booking' },
@@ -44,6 +48,7 @@ const routes: Routes = [
   { path: 'bus-form', component: BusFormComponent },
 
   { path: 'register', component: RegisterFormComponent },
+  { path: 'reports/ticket', component: TicketReportComponent },
 ]
 
 @NgModule({
@@ -65,11 +70,14 @@ const routes: Routes = [
     BookingHistoryComponent,
 
     MessageComponent,
-<<<<<<< HEAD
+
      BusFormComponent,
-=======
+
      TicketViewComponent,
->>>>>>> a6462d0ae19233da43b127437596f74011a53c5d
+
+
+     TicketReportComponent,
+
   ],
   imports: [
     BrowserModule,
