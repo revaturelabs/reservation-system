@@ -25,11 +25,19 @@ import { AuthGuard } from './auth.guard'
 import { MessageComponent } from './message/message.component'
 import { BookingSummaryComponent } from './booking-summary/booking-summary.component'
 import { BookingFinalComponent } from './booking-final/booking-final.component';
+
+import { BusFormComponent } from './bus-form/bus-form.component'
+
+import { TicketViewComponent } from './ticket-view/ticket-view.component'
+
+
 import { TicketViewComponent } from './ticket-view/ticket-view.component';
 import { TicketReportComponent } from './ticket-report/ticket-report.component'
 
+
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'booking' },
+  
   { path: 'booking', component: BookingComponent },
   {
     path: 'booking-history',
@@ -37,6 +45,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'login', component: LoginFormComponent },
+  { path: 'bus-form', component: BusFormComponent },
+
   { path: 'register', component: RegisterFormComponent },
   { path: 'reports/ticket', component: TicketReportComponent },
 ]
@@ -60,8 +70,14 @@ const routes: Routes = [
     BookingHistoryComponent,
 
     MessageComponent,
+
+     BusFormComponent,
+
      TicketViewComponent,
+
+
      TicketReportComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -26,4 +26,5 @@ public class Route {
     private String destination;
     private int distance;
     private List<Trip> tripList=new ArrayList<>();
+
 }
