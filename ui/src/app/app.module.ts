@@ -24,8 +24,8 @@ import { NavbarComponent } from './navbar/navbar.component'
 import { AuthGuard } from './auth.guard'
 import { MessageComponent } from './message/message.component'
 import { BookingSummaryComponent } from './booking-summary/booking-summary.component'
-import { BookingFinalComponent } from './booking-final/booking-final.component';
-import { TicketViewComponent } from './ticket-view/ticket-view.component';
+import { BookingFinalComponent } from './booking-final/booking-final.component'
+import { TicketViewComponent } from './ticket-view/ticket-view.component'
 import { TicketReportComponent } from './ticket-report/ticket-report.component'
 
 const routes: Routes = [
@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegisterFormComponent },
-  { path: 'reports/ticket', component: TicketReportComponent },
+  { path: 'reports/tickets', component: TicketReportComponent },
 ]
 
 @NgModule({
@@ -60,8 +60,8 @@ const routes: Routes = [
     BookingHistoryComponent,
 
     MessageComponent,
-     TicketViewComponent,
-     TicketReportComponent,
+    TicketViewComponent,
+    TicketReportComponent,
   ],
   imports: [
     BrowserModule,

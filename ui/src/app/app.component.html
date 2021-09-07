@@ -17,6 +17,15 @@
         Booking-history
       </a>
     </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        routerLinkActive="active"
+        [routerLink]="['reports/tickets']"
+      >
+        Admin/Reports
+      </a>
+    </li>
     <ng-container *ngIf="!isLoggedIn">
       <li class="nav-item">
         <a class="nav-link" routerLinkActive="active" [routerLink]="['login']">

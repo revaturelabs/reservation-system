@@ -1,0 +1,26 @@
+version: '2.1'
+
+services:
+  
+  mongodb_container:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+  
+  reservation:
+    image: nagabhushanamn/reservation-service
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb_container
+
+  ui:
+    image: nagabhushanamn/ui
+    ports:
+      - 80:80
+     
+        
+volumes:
+  mongodb_data_container:

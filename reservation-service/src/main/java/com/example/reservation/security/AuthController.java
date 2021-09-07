@@ -34,8 +34,6 @@ public class AuthController {
     @PostMapping("/auth")
     public ResponseEntity<?> authenticate(@RequestBody AuthRequest authRequest) {
 
-        System.out.println(authRequest);
-
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));

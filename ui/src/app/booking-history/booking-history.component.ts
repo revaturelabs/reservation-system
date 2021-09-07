@@ -22,5 +22,17 @@ export class BookingHistoryComponent implements OnInit {
     this.bookingService.getBookingHistory().subscribe((response: any) => {
       this.history = response
     })
+
+    this.bookingService.bookingStream.subscribe((data: any) => {
+      if (data.cancelled) {
+        this.bookingService.getBookingHistory().subscribe((response: any) => {
+          this.history = response
+        })
+      }
+    })
+  }
+
+  cancelTicket(ticketId: string): void {
+    this.bookingService.cancelTicket(ticketId)
   }
 }

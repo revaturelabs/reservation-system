@@ -70,6 +70,14 @@ export class BookingService {
     })
   }
 
+  cancelTicket(ticketId: string) {
+    this.httpClient.put(this.api + '/' + ticketId, {}).subscribe((response) => {
+      this.bookingStream.next({
+        cancelled: true,
+      })
+    })
+  }
+
   getBookingHistory() {
     return this.httpClient.get(this.api)
   }

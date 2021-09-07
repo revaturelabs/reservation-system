@@ -1,4 +1,3 @@
-
 server:
   port: 8080
 
@@ -8,14 +7,7 @@ STRIPE_PUBLIC_KEY: pk_test_51JUP34SH554kPulbT8WLN5oatFKrJP9ELWwY9mL1e7EzbcbQj2Vq
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/reservation-system
-
-
-
-
-
-
-
+      uri: mongodb://mongodb_container:27017/reservation-system
 
 api:
   common:
@@ -31,7 +23,6 @@ api:
       name: NAME OF CONTACT
       url: URL TO CONTACT
       email: contact@mail.com
-
 
 springdoc:
   swagger-ui.path: /openapi/swagger-ui.html

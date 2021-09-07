@@ -23,7 +23,7 @@ public class ReservationSystemUserDetailsService implements UserDetailsService {
         Optional<com.example.reservation.model.User> optional = userRepository.findById(s);
         com.example.reservation.model.User dbUser = optional.orElseThrow(() -> new UsernameNotFoundException(s));
         String[] authorities={};
-        if(s.equals("revature@email.com")){
+        if(s.equals("admin@gmail.com")){
             authorities=new String[]{"ADMIN","USER"};
         }else{
             authorities=new String[]{"USER"};

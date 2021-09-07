@@ -41,7 +41,6 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     MailService mailService;
 
-
     // Price Matrix
     private double getTripPrice(Route route, BusType busType, SeatType seatType) {
         double tripPrice = 7 * route.getDistance();
@@ -56,7 +55,6 @@ public class TicketServiceImpl implements TicketService {
         }
         return tripPrice;
     }
-
 
     private double getTotalPrice(double tripPrice, List<TravellerRequestPayload> travellerList) {
         double totalPrice = 0;
@@ -78,7 +76,6 @@ public class TicketServiceImpl implements TicketService {
         }
         return totalPrice;
     }
-
 
     @Override
     public TicketResponsePayload bookNewTicket(TicketRequestPayload ticketRequestPayload) {
@@ -147,14 +144,15 @@ public class TicketServiceImpl implements TicketService {
 
     }
 
-
     @Override
-    public List<Ticket> getTickets() {
-        SecurityContext context = SecurityContextHolder.getContext();
-        String userEmail = context.getAuthentication().getName();
+    public List<Ticket> getUserTickets(String userEmail) {
         return ticketRepository.findAll(userEmail);
     }
 
+    @Override
+    public List<Ticket> getAllTickets() {
+        return ticketRepository.findAll();
+    }
 
     public TicketRefundPayload cancelTicketForAPassenger(ObjectId ticketId, int seatNumber) {
         Ticket ticket=  ticketRepository.findById(ticketId).orElseThrow(()-> new ResourceNotFoundException("No Such Ticket available"));
@@ -200,11 +198,13 @@ public class TicketServiceImpl implements TicketService {
         return  ticketCancelPayload;
     }
 
-    TicketRefundPayload cancelTicket(ObjectId ticketId){
+    public TicketRefundPayload cancelTicket(ObjectId ticketId){
         Ticket ticket=  ticketRepository.findById(ticketId).orElseThrow(()-> new ResourceNotFoundException("No Such Ticket available"));
         List<Integer> seats=ticket.getSeatNumbers();
-        ReservedSeats reservedSeats=reservedSeatsRepository.findReservedSeats(ticket.getTravelDate(),ticket.getBus().getNumber());
-        reservedSeats.getReservedSeats().addAll(seats);
+        System.out.println(ticket.getTravelDate());
+        System.out.println(ticket.getBus().getNumber());
+        ReservedSeats reservedSeats=reservedSeatsRepository.findReservedSeats(ticket.getTravelDate().plusDays(1),ticket.getBus().getNumber());
+        reservedSeats.getReservedSeats().removeAll(seats);
         ticket.setStatus(TicketStatus.CANCELED);
         ticketRepository.save(ticket);
         reservedSeatsRepository.save(reservedSeats);

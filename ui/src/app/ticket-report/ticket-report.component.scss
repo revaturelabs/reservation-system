@@ -1,32 +1,28 @@
 table {
-    width: 100%;
-  }
+  width: 100%;
+}
 
- 
-  .confirmed{
-    display: inline;
-    padding: 7px;
-    border-radius: 25px;
-    width: 200px;
-    border: 1px solid rgb(2, 250, 2);
-    background-color: rgba(6, 255, 6, 0.288);
-
-  }
-  .waiting{
-    display: inline;
-    padding: 7px;
-    border-radius: 25px;
-    width: 200px;
-    border: 1px solid rgb(239, 243, 4);
-    background-color: rgba(255, 251, 8, 0.329);
-
-  }
-  .cancelled{
-    display: inline;
-    padding: 7px;
-    border-radius: 25px;
-    width: 200px;
-    border: 1px solid rgb(255, 6, 6);
-    background-color: rgba(255, 6, 6, 0.226);
-
-  }
+.CONIFRMED {
+  display: inline;
+  padding: 7px;
+  border-radius: 25px;
+  width: 200px;
+  border: 1px solid rgb(2, 250, 2);
+  background-color: rgba(6, 255, 6, 0.288);
+}
+.WAITING {
+  display: inline;
+  padding: 7px;
+  border-radius: 25px;
+  width: 200px;
+  border: 1px solid rgb(239, 243, 4);
+  background-color: rgba(255, 251, 8, 0.329);
+}
+.CANCELED {
+  display: inline;
+  padding: 7px;
+  border-radius: 25px;
+  width: 200px;
+  border: 1px solid rgb(255, 6, 6);
+  background-color: rgba(255, 6, 6, 0.226);
+}

@@ -14,7 +14,7 @@ import com.example.reservation.payloads.ResponseErrorPayload;
 import com.example.reservation.payloads.UserRequestPayload;
 import com.example.reservation.service.UserService;
 
-@Tag(name = "bus", description ="REST API for user resource")
+@Tag(name = "users", description ="REST API for user resource")
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/users")
